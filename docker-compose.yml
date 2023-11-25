@@ -5,17 +5,17 @@ volumes:
 
 services:
   back:
-    image: --vaban/foodgram_backend--
-    env_file: ../.env
+    image: mvobr/gen_pass_back
+    env_file: .env
   front:
-    image: --vaban/foodgram_frontend--
-    env_file: ../.env
+    image: mvobr/gen_pass_front
+    env_file: .env
     volumes:
       - static:/app/result_build/build
   nginx:
     image: nginx:1.19.3
     ports:
-      - "8081:80"
+      - "8052:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static:/usr/share/nginx/html/
