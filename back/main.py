@@ -3,6 +3,7 @@ from aiogram.types import Update
 from fastapi import FastAPI
 
 from bot_init import bot, dp
+from db.db_init import Users, sessions
 
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
@@ -11,8 +12,8 @@ WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET")
 BASE_WEBHOOK_URL = os.getenv("BASE_WEBHOOK_URL")
 DEBUG = os.getenv("DEBUG", None)
 
-from commands import client_commands
-from handlers import other
+from bot.commands import client_commands
+from bot.handlers import other
 
 other.register_handlers_other(dp)
 
@@ -24,6 +25,7 @@ async def on_startup() -> None:
         await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}",
                                 secret_token=WEBHOOK_SECRET)
     await client_commands.set_all_commands(bot)
+
 
 async def on_shutdown() -> None:
     return await bot.session.close()
