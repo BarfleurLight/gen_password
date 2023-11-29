@@ -3,7 +3,7 @@ import secrets, random
 
 
 class Gen_Pass:
-    def __init__(self, len, numbers, uppercase, lowercase, symbols, delimiter):
+    def __init__(self, length, numbers, uppercase, lowercase, symbols, delimiter, delimiter_value, **kwargs):
         self.base_kit = {
             'numbers': string.digits,
             'uppercase': string.ascii_uppercase,
@@ -12,23 +12,24 @@ class Gen_Pass:
         }
         self.start_kit = ''
 
-        self.len = len
+        self.length = length
         self.numbers = numbers
         self.uppercase = uppercase
         self.lowercase = lowercase
         self.symbols = symbols
         self.delimiter = delimiter
+        self.delimiter_value = delimiter_value
 
     def check_data(self):
-        if self.delimiter.get('key') and self.delimiter.get('value') in [4,5,6]:
-            if self.delimiter.get('value') == 4:
-                if self.len in [9, 14, 19]:
+        if self.delimiter and self.delimiter_value in [4,5,6]:
+            if self.delimiter_value == 4:
+                if self.length in [9, 14, 19]:
                     return True
-            if self.delimiter.get('value') == 5:
-                if self.len in [11, 17, 23]:
+            if self.delimiter_value == 5:
+                if self.length in [11, 17, 23]:
                     return True
-            if self.delimiter.get('value') == 6:
-                if self.len in [13, 20, 27]:
+            if self.delimiter_value == 6:
+                if self.length in [13, 20, 27]:
                     return True
         return False
 
@@ -49,16 +50,16 @@ class Gen_Pass:
         return self.start_kit
     
     def create_pass(self):
-        self.len -= self.len % self.delimiter.get('value')
-        raz = self.delimiter.get('value')
+        self.length -= self.length % self.delimiter_value
+        raz = self.delimiter_value
         res =''
 
-        while self.len:
+        while self.length:
             if raz == 0:
                 res += '-'
-                raz = self.delimiter.get('value')
+                raz = self.delimiter_value
             res += random.choice(self.start_kit)
-            self.len -= 1
+            self.length -= 1
             raz -= 1
         return res
 
@@ -87,16 +88,15 @@ class Gen_Pass:
 # atelgk-asdweq-atelgk-asdweq
 
 example = {
-    'len': 23,
+    'length': 23,
     'numbers': True,
     'uppercase': True,
     'lowercase': True,
     'symbols': True,
-    'delimiter': {
-        'key': True,
-        'value': 5},
-}
+    'delimiter': True,
+    'delimiter_value': 5
+    }
 
-print(Gen_Pass(**example).main())
-print(Gen_Pass(**example).main())
-print(Gen_Pass(**example).main())
+# print(Gen_Pass(**example).main())
+# print(Gen_Pass(**example).main())
+# print(Gen_Pass(**example).main())

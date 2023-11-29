@@ -3,7 +3,7 @@ from aiogram.types import Update
 from fastapi import FastAPI
 
 from bot_init import bot, dp
-from db.db_init import Users, sessions
+
 
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
@@ -12,12 +12,16 @@ WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET")
 BASE_WEBHOOK_URL = os.getenv("BASE_WEBHOOK_URL")
 DEBUG = os.getenv("DEBUG", None)
 
+from db.db import get_default_pass
 from bot.commands import client_commands
-from bot.handlers import other
+from bot.handlers import client, other
 
+client.register_handlers_client(dp)
 other.register_handlers_other(dp)
 
+
 async def on_startup() -> None:
+    get_default_pass()
     print('Старт')
     if DEBUG:
         await bot.delete_webhook()

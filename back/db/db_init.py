@@ -3,8 +3,8 @@ from sqlalchemy.orm import DeclarativeBase, Session
 from typing import List
 from typing import Optional
 from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import mapped_column, relationship
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy import ForeignKey
 
 
@@ -18,26 +18,47 @@ class Base(DeclarativeBase):
 class Users(Base):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    telegram_id: Mapped[int]
+    telegram_id: Mapped[int] = mapped_column(primary_key=True)
+    admin: Mapped[bool]
+    fast: Mapped[int] = mapped_column(ForeignKey("passwords.id"))
+    
+    passwords: Mapped[List["User_Password"]] = relationship(back_populates="user")
+    
+    def __repr__(self) -> str:
+        return f"User(telegram_id={self.telegram_id!r}, admin={self.admin!r}, fast={self.fast!r})"
 
-    passwords: Mapped[List["Passwords"]] = relationship(back_populates="user")
+
+class User_Password(Base):
+    __tablename__ = "user_passwords"
+    name_pass: Mapped[str]
+
+    users_fk: Mapped[int] = mapped_column(ForeignKey("users.telegram_id"), primary_key=True)
+    password_fk: Mapped[int] = mapped_column(ForeignKey("passwords.id"), primary_key=True)
+
+    password: Mapped["Passwords"] = relationship(back_populates="users")
+    user: Mapped["Users"] = relationship(back_populates="passwords")
 
     def __repr__(self) -> str:
-        return f"User(id={self.id!r}, telegram_id={self.telegram_id!r})"
-
+        return f"User_Password(name_pass{self.name_pass!r} users_fk={self.users_fk!r},password_fk={self.password_fk!r})"
 
 class Passwords(Base):
     __tablename__ = "passwords"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id = mapped_column(ForeignKey("users.id"))
     length: Mapped[int] = mapped_column()
+    numbers: Mapped[bool]
+    uppercase: Mapped[bool]
+    lowercase: Mapped[bool]
+    symbols: Mapped[bool]
+    delimiter: Mapped[bool]
+    delimiter_value: Mapped[int]
 
-    user: Mapped[Users] = relationship(back_populates="passwords")
+    users: Mapped[List["User_Password"]] = relationship(back_populates="password")
+
     def __repr__(self) -> str:
-        return f"Passwords(id={self.id!r}, email_address={self.email_address!r})"
-    
+        return f"Passwords(id={self.id!r})"
+
+
 Base.metadata.create_all(engine)
 #https://www.youtube.com/watch?v=cH0immwfykI&ab_channel=PrettyPrinted
 
