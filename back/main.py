@@ -14,8 +14,9 @@ DEBUG = os.getenv("DEBUG", None)
 
 from db.db import get_default_pass
 from bot.commands import client_commands
-from bot.handlers import client, other
+from bot.handlers import client, other, callback
 
+callback.register_callback_handlers(dp)
 client.register_handlers_client(dp)
 other.register_handlers_other(dp)
 
