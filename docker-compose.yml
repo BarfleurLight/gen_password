@@ -1,17 +1,26 @@
 version: '3.3'
 
 volumes:
+  pg_data:
   static:
 
 services:
+  db:
+    image: postgres:13.10
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
   back:
     image: mvobr/gen_pass_back
     env_file: .env
+    depends_on:
+      - db
   front:
     image: mvobr/gen_pass_front
     env_file: .env
     volumes:
       - static:/app/result_build/build
+
   nginx:
     image: nginx:1.19.3
     ports:

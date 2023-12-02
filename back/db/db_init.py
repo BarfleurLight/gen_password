@@ -1,14 +1,15 @@
 import sqlalchemy as db
+import os
 from sqlalchemy.orm import DeclarativeBase, Session
 from typing import List
-from typing import Optional
+
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column, relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy import ForeignKey
 
 
-engine = db.create_engine('sqlite:///gen_pass.db', echo=True)
+engine = db.create_engine(os.getenv('DB_URL', 'sqlite:///gen_pass.db'), echo=True)
 sessions = Session(engine, expire_on_commit=True)
 
 class Base(DeclarativeBase):
