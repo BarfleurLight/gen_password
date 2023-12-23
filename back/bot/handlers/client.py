@@ -9,7 +9,7 @@ async def default(message: types.Message, bot: Bot):
     id = message.from_user.id
     user = get_user(id)
     param = user.passwords[0].password.__dict__
-    await message.answer(Gen_Pass(**param).main())
+    await message.answer(text=f'`{Gen_Pass(**param).main()}`', parse_mode="MARKDOWN")
     await message.answer(Gen_Pass(**param).main())
     await message.answer(Gen_Pass(**param).main())
 

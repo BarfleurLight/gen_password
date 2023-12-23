@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Example from './components/example';
+import Complexity from './components/complexity';
+import Form from './components/form';
+import Button from './components/button/button';
+
 
 function App() {
+  const pass = {
+    length: 8,
+    numbers: true,
+    uppercase: true,
+    lowercase: true,
+    symbols: true,
+    delimiter: false,
+    delimiter_value: 4,
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Form pass={pass}/>
+      <Button />
     </div>
   );
 }

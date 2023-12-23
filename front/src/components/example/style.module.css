@@ -1,0 +1,15 @@
+.example {
+    background-color: #cedfde;
+    /* font-size: calc(10px + 2vmin); */
+    /* min-height: 30vh; */
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 10vmin;
+    width: 30vmin;
+    margin: 0 auto;
+    /* pointer-events: none; */
+    color: #282c34;
+    border-radius: 10px;
+  }
+
