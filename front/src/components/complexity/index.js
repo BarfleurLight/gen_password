@@ -3,7 +3,7 @@ import styles from './style.module.css';
 const Complexity = () => {
 
   return (
-      <progress value={0.5} />
+      <progress className={styles.progress} value={0.5} />
   )
 
 }

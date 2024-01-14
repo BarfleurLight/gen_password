@@ -1,3 +1,4 @@
- progress {
-    font-size: 1,5vw;
-  }
+ .progress {
+    display: block;
+    margin: 0 auto;
+}

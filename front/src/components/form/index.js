@@ -72,14 +72,14 @@ const Form = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.main} >
     <Example pass={formData}/>
     <Complexity />
-    <div>
-    <form onSubmit={handleSubmit}>
+    <form className={styles.selecters} onSubmit={handleSubmit}>
       <label>
         Длина: {formData.length}
         <input
+          className={styles.select_bar}
           type="range"
           name="length"
           min={range.min}
@@ -148,7 +148,6 @@ const Form = (props) => {
       </label>
       <button type="submit">Сгенерировать пароль</button>
     </form>
-    </div>
     </div>
   );
 }

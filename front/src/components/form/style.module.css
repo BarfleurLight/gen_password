@@ -1,28 +1,39 @@
-.form {
-    color: #282c34;
-  }
+.main {
+  display: block;
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin: 0 auto;
 
-  form {
-    display: block;
-    height: 50vmin;
-    width: 30vmin;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 1px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
+}
+
+
+.selecters {
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
   }
   
   label {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1vw;
-    font-size: 1vw;
-    padding: 0,1vw;
+    font-size: calc(24px + 2vmin);
+    padding: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
     text-align: left;
+  }
+
+.select_bar {
+  width: 100%;
+}
+
+  input {
+    width: 5%;
   }
 
 

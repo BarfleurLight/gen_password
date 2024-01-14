@@ -1,15 +1,15 @@
 .example {
-    background-color: #cedfde;
-    /* font-size: calc(10px + 2vmin); */
-    /* min-height: 30vh; */
+    /* background-color: #cedfde; */
+    color: #ffffff;
+    font-size: calc(32px + 2vmin);
+    min-height: 20vh;
     display: block;
-    align-items: center;
-    justify-content: center;
-    height: 10vmin;
-    width: 30vmin;
     margin: 0 auto;
-    /* pointer-events: none; */
-    color: #282c34;
-    border-radius: 10px;
+    padding-top: 5%;
+    padding-left: 7%;
+    padding-right: 7%;
+    /* border-radius: 10px; */
+    text-align: center;
+    word-wrap: break-word;
   }
 

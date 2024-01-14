@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       
       <Form pass={pass}/>
-      <Button />
+      {/* <Button /> */}
     </div>
   );
 }
