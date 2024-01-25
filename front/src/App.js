@@ -3,6 +3,7 @@ import Example from './components/example';
 import Complexity from './components/complexity';
 import Form from './components/form';
 import Button from './components/button/button';
+import { useTg } from './utils/tg/tg';
 
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
     delimiter: false,
     delimiter_value: 4,
   }
+  
+  const {onMainButton} = useTg()
 
   return (
     <div className="App">
-      
       <Form pass={pass}/>
-      {/* <Button /> */}
+      {onMainButton}
     </div>
   );
 }
