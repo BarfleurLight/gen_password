@@ -22,15 +22,7 @@ function App() {
 
   useEffect(() => {
     tg.ready();
-  }, [])
-
-  useEffect(() => {
-    tg.MainButton.setParams({
-        text: 'Создать шаблон'
-    })
-  }, [])
-
-  useEffect(() => {
+    tg.MainButton.setParams({text: 'Создать шаблон'});
     tg.MainButton.show();
   }, [])
 

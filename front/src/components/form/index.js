@@ -1,7 +1,8 @@
 import styles from './style.module.css'
 import Example from '../example/index.js';
 import Complexity from '../complexity/index.js';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import {useTelegram} from '../../utils/tg/tg';
 
 
 const Form = (props) => {
@@ -70,6 +71,20 @@ const Form = (props) => {
     console.log('Отправленные данные:', formData);
     console.log('Отправленные данные:', range);
   };
+  //Start
+  const {tg} = useTelegram();
+  const onSendData = useCallback(() => {
+    tg.onClose();
+  }, [])
+
+useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData)
+    return () => {
+        tg.offEvent('mainButtonClicked', onSendData)
+    }
+}, [onSendData])
+  //stop
+  
 
   return (
     <div className={styles.main} >
@@ -89,6 +104,7 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </label>
+      <hr></hr>
       <label>
         Цифры:
         <input
@@ -146,7 +162,7 @@ const Form = (props) => {
           </select>
         )}
       </label>
-      <button type="submit">Сгенерировать пароль</button>
+      {/* <button type="submit">Сгенерировать пароль</button> */}
     </form>
     </div>
   );
