@@ -18,11 +18,16 @@ function App() {
   }
   
   const {onMainButton} = useTg()
+  const tg = window.Telegram.WebApp;
+
+  const onMButton = () => {
+      tg.MainButton.show()
+  }
 
   return (
     <div className="App">
       <Form pass={pass}/>
-      {onMainButton}
+      <p>{onMButton}</p>
     </div>
   );
 }
