@@ -65,32 +65,13 @@ const Form = (props) => {
   };
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // В этой функции вы можете отправить данные формы на сервер или выполнить другие действия
-    console.log('Отправленные данные:', formData);
-    console.log('Отправленные данные:', range);
-  };
-  //Start
-  const {tg} = useTelegram();
-  const onSendData = useCallback(() => {
-    tg.onClose();
-  }, [])
-
-useEffect(() => {
-    tg.onEvent('mainButtonClicked', onSendData)
-    return () => {
-        tg.offEvent('mainButtonClicked', onSendData)
-    }
-}, [onSendData])
-  //stop
-  
+   
 
   return (
     <div className={styles.main} >
     <Example pass={formData}/>
     <Complexity />
-    <form className={styles.selecters} onSubmit={handleSubmit}>
+    <form className={styles.selecters}>
       <label>
         Длина: {formData.length}
         <input
@@ -114,7 +95,6 @@ useEffect(() => {
           onChange={handleChange}
         />
       </label>
-      
       <label>
         Заглавные буквы:
         <input
@@ -162,7 +142,6 @@ useEffect(() => {
           </select>
         )}
       </label>
-      {/* <button type="submit">Сгенерировать пароль</button> */}
     </form>
     </div>
   );

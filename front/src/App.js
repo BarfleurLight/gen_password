@@ -19,7 +19,7 @@ function App() {
   }
 
   const {tg} = useTelegram();
-
+ //Это работает
   useEffect(() => {
     tg.ready();
     tg.MainButton.setParams({text: 'Создать шаблон'});
