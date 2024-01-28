@@ -1,34 +1,35 @@
 import './App.css';
-import {useEffect} from "react";
-import Example from './components/example';
-import Complexity from './components/complexity';
+import React, {useEffect, useState } from "react";
 import Form from './components/form';
-import Button from './components/button/button';
+import Head from './components/head';
 import {useTelegram} from './utils/tg/tg';
-
+import {defoltConsts} from './utils/consts'
 
 function App() {
-  const pass = {
-    length: 8,
-    numbers: true,
-    uppercase: true,
-    lowercase: true,
-    symbols: true,
-    delimiter: false,
-    delimiter_value: 4,
-  }
-
+  
+  // Подключение MainButton
   const {tg} = useTelegram();
- //Это работает
   useEffect(() => {
     tg.ready();
     tg.MainButton.setParams({text: 'Создать шаблон'});
     tg.MainButton.show();
   }, [])
+  
+  //Стандартные параметры паароля
+  const {defolt_pass} = defoltConsts();
+
+  const [Password, setPassword] = useState(defolt_pass);
+  const savePassword = (initDataPass) =>
+  { 
+    setPassword({
+      ...initDataPass,
+    })
+  };
 
   return (
     <div className="App">
-      <Form pass={pass}/>
+      <Head pass={Password}/>
+      <Form onSavePass={savePassword} pass={Password}/>
     </div>
   );
 }

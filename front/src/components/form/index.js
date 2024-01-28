@@ -1,38 +1,25 @@
 import styles from './style.module.css'
-import Example from '../example/index.js';
-import Complexity from '../complexity/index.js';
-import React, { useCallback, useEffect, useState } from 'react';
-import {useTelegram} from '../../utils/tg/tg';
+import React, { useState } from 'react';
+import {defoltConsts} from '../../utils/consts'
+import Example from '../example';
 
 
 const Form = (props) => {
-  const [formData, setFormData] = useState(props.pass);
-  const [range, setFromRange]= useState({
-    min: 0,
-    max: 64,
-    step: 1
-  });
 
+
+  // Установка состояния пароля
+  const [formData, setFormData] = useState(props.pass);
+
+  // Установка стандартной длинны
+  const { rangeValueTable} = defoltConsts();
+  const [range, setFromRange]= useState(rangeValueTable["0"]);
+
+  // Обновление формы
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     
     // Если поле чекбокса, используем checked, в противном случае используем value
     const inputValue = type === 'checkbox' ? checked : parseInt(value);
-
-    const rangeValueTable = {
-      "0": {min: 0,
-        max: 64,
-        step: 1},
-      "4": {min: 4,
-        max: 19,
-        step: 5},
-      "5": {min: 5,
-        max: 23,
-        step: 6},
-      "6": {min: 6,
-        max: 27,
-        step: 7},
-    }
 
     let newLen = 8
     if (name ==='delimiter' && checked === false) {
@@ -49,28 +36,31 @@ const Form = (props) => {
       setFromRange(rangeValueTable[value]);
     }
 
-
     if (name ==='delimiter' || name ==='delimiter_value') {
       setFormData({
         ...formData,
         [name]: inputValue,
         length: newLen,
       });
+      props.onSavePass({
+        ...formData,
+        [name]: inputValue,
+        length: newLen,
+      });
+      
       return
     }
     setFormData({
       ...formData,
       [name]: inputValue,
     });
+    props.onSavePass({
+      ...formData,
+      [name]: inputValue,
+    });
   };
 
-
-   
-
   return (
-    <div className={styles.main} >
-    <Example pass={formData}/>
-    <Complexity />
     <form className={styles.selecters}>
       <label>
         Длина: {formData.length}
@@ -143,7 +133,6 @@ const Form = (props) => {
         )}
       </label>
     </form>
-    </div>
   );
 }
 
