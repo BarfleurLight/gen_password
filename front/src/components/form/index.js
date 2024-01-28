@@ -75,7 +75,6 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </label>
-      <hr></hr>
       <label>
         Цифры:
         <input
