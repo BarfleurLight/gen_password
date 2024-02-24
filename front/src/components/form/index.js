@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import React, {useCallback, useState, useEffect } from 'react';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import {defoltConsts} from '../../utils/consts'
 import {useTelegram} from '../../utils/tg/tg';
 
