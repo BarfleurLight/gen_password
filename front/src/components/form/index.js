@@ -1,7 +1,8 @@
 import styles from './style.module.css'
-import React, { useState } from 'react';
+import React, {useCallback, useState, useEffect } from 'react';
+// import React, { useState } from 'react';
 import {defoltConsts} from '../../utils/consts'
-import Example from '../example';
+import {useTelegram} from '../../utils/tg/tg';
 
 
 const Form = (props) => {
@@ -13,6 +14,18 @@ const Form = (props) => {
   // Установка стандартной длинны
   const { rangeValueTable} = defoltConsts();
   const [range, setFromRange]= useState(rangeValueTable["0"]);
+
+  const {tg} = useTelegram();
+
+  const onSendData = useCallback(() => {
+    console.log('test')
+    tg.sendData(JSON.stringify({}));
+    }, [])
+
+  useEffect(() => {
+      tg.onEvent('mainButtonClicked', onSendData)
+      return () => {tg.offEvent('mainButtonClicked', onSendData)}
+    }, [onSendData])
 
   // Обновление формы
   const handleChange = (event) => {
