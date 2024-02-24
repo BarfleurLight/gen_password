@@ -28,7 +28,7 @@ async def lst(message: types.Message, bot: Bot):
         web_data = message.web_app_data.data
         await bot.send_message(
             message.from_user.id,
-            web_data)
+            'test-string')
 
 async def custom(message: types.Message, bot: Bot):
     await message.answer(text='Соберите пароль', reply_markup=create_markup().as_markup())
