@@ -5,7 +5,7 @@ async def get_start(message: types.Message):
     await message.answer(f'Hello {message.from_user.first_name}!')
 
 async def echo_send(message: types.Message):
-    await message.answer('message.text')
+    await message.answer(message.text)
 
 
 def register_handlers_other(dp):
