@@ -58,4 +58,6 @@ jobs:
           cd gen_pass
           sudo docker compose pull
           sudo docker compose down
+          sudo docker rmi mvobr/gen_pass_front 
+          sudo docker rmi mvobr/gen_pass_back
           sudo docker compose up -d
