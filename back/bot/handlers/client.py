@@ -24,6 +24,11 @@ async def lst(message: types.Message, bot: Bot):
         "Выберите шаблон пароля",
         reply_markup=create_markup(passwords).as_markup())
     
+    if message.web_app_data.data:
+        web_data = message.web_app_data.data
+        await bot.send_message(
+            message.from_user.id,
+            f'test {web_data}')
 
 async def custom(message: types.Message, bot: Bot):
     await message.answer(text='Соберите пароль', reply_markup=create_markup().as_markup())

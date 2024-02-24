@@ -15,6 +15,7 @@ def create_markup(passwords=[]):
     builder.add(kb)
     return builder
 
+
 class ListCallback(CallbackData, prefix="list"):
     length: int
     numbers: bool

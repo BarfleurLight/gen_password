@@ -18,9 +18,12 @@ const Form = (props) => {
   const {tg} = useTelegram();
 
   const onSendData = useCallback(() => {
+    // const test = {
+    //   ...formData
+    // }
     console.log('test')
-    tg.sendData(JSON.stringify({}));
-    }, [])
+    tg.sendData(JSON.stringify({formData}));
+    }, [formData])
 
   useEffect(() => {
       tg.onEvent('mainButtonClicked', onSendData)
