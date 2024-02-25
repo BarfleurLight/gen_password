@@ -9,11 +9,20 @@ function App() {
   
   // Подключение MainButton
   const {tg} = useTelegram();
+
+  const sendDataToTelegram = () => {
+    tg.sendData('Password');
+  }
+
   useEffect(() => {
     tg.ready();
     tg.MainButton.setParams({text: 'Создать шаблон'});
     tg.MainButton.show();
-  }, [tg])
+    tg.onEvent('mainButtonClicked', sendDataToTelegram)
+    return () => {
+      tg.offEvent('mainButtonClicked', sendDataToTelegram)
+    }
+  }, [sendDataToTelegram])
   
   //Стандартные параметры паароля
   const {defolt_pass} = defoltConsts();

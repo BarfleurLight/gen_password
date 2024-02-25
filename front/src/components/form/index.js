@@ -1,8 +1,8 @@
 import styles from './style.module.css'
-import React, { useState, useEffect } from 'react';
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {defoltConsts} from '../../utils/consts'
-import {useTelegram} from '../../utils/tg/tg';
+// import {useTelegram} from '../../utils/tg/tg';
 
 
 const Form = (props) => {
@@ -15,18 +15,18 @@ const Form = (props) => {
   const { rangeValueTable} = defoltConsts();
   const [range, setFromRange]= useState(rangeValueTable["0"]);
 
-  const {tg} = useTelegram();
+  // const {tg} = useTelegram();
 
-  const sendDataToTelegram = () => {
-    tg.sendData(formData);
-  }
+  // const sendDataToTelegram = () => {
+  //   tg.sendData(formData);
+  // }
 
-  useEffect(() => {
-    tg.onEvent('mainButtonClicked', sendDataToTelegram)
-    return () => {
-      tg.offEvent('mainButtonClicked', sendDataToTelegram)
-    }
-  }, [sendDataToTelegram])
+  // useEffect(() => {
+  //   tg.onEvent('mainButtonClicked', sendDataToTelegram)
+  //   return () => {
+  //     tg.offEvent('mainButtonClicked', sendDataToTelegram)
+  //   }
+  // }, [sendDataToTelegram])
 
   // Обновление формы
   const handleChange = (event) => {
