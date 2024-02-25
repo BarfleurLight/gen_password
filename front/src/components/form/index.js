@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import React, {useCallback, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import React, { useState } from 'react';
 import {defoltConsts} from '../../utils/consts'
 import {useTelegram} from '../../utils/tg/tg';
@@ -17,18 +17,20 @@ const Form = (props) => {
 
   const {tg} = useTelegram();
 
-  const onSendData = useCallback(() => {
-    // const test = {
-    //   ...formData
-    // }
-    console.log('test')
-    tg.sendData(JSON.stringify({formData}));
-    }, [formData])
+  // const onSendData = useCallback(() => {
+  //   // const test = {
+  //   //   ...formData
+  //   // }
+  //   console.log('test')
+  //   tg.sendData(JSON.stringify({formData}));
+  //   }, [formData])
 
   useEffect(() => {
-      tg.onEvent('mainButtonClicked', onSendData)
-      return () => {tg.offEvent('mainButtonClicked', onSendData)}
-    }, [onSendData])
+    tg.onEvent('mainButtonClicked', function(){
+      tg.sendData(JSON.stringify({formData})); 
+      //при клике на основную кнопку отправляем данные в строковом виде
+    });
+  }, [tg, formData])
 
   // Обновление формы
   const handleChange = (event) => {
