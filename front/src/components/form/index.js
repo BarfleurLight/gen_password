@@ -17,19 +17,21 @@ const Form = (props) => {
 
   const {tg} = useTelegram();
 
-  // const onSendData = useCallback(() => {
-  //   // const test = {
-  //   //   ...formData
-  //   // }
+  // const onSendData = () => {
   //   console.log('test')
   //   tg.sendData(JSON.stringify({formData}));
-  //   }, [formData])
+  //   }
+
+  // useEffect(() => {
+  //   tg.onEvent('mainButtonClicked', function(){
+  //     tg.sendData(JSON.stringify({formData})); 
+  //   });
+  // }, [tg, formData])
 
   useEffect(() => {
-    tg.onEvent('mainButtonClicked', function(){
-      tg.sendData(JSON.stringify({formData})); 
-      //при клике на основную кнопку отправляем данные в строковом виде
-    });
+    tg.MainButton.onClick(function(){
+          tg.sendData(JSON.stringify({formData})); 
+        });
   }, [tg, formData])
 
   // Обновление формы

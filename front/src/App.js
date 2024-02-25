@@ -13,7 +13,7 @@ function App() {
     tg.ready();
     tg.MainButton.setParams({text: 'Создать шаблон'});
     tg.MainButton.show();
-  }, [])
+  }, [tg])
   
   //Стандартные параметры паароля
   const {defolt_pass} = defoltConsts();
