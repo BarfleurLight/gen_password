@@ -17,22 +17,16 @@ const Form = (props) => {
 
   const {tg} = useTelegram();
 
-  // const onSendData = () => {
-  //   console.log('test')
-  //   tg.sendData(JSON.stringify({formData}));
-  //   }
-
-  // useEffect(() => {
-  //   tg.onEvent('mainButtonClicked', function(){
-  //     tg.sendData(JSON.stringify({formData})); 
-  //   });
-  // }, [tg, formData])
+  const sendDataToTelegram = () => {
+    tg.sendData(formData);
+  }
 
   useEffect(() => {
-    tg.MainButton.onClick(function(){
-          tg.sendData(JSON.stringify({formData})); 
-        });
-  }, [tg, formData])
+    tg.onEvent('mainButtonClicked', sendDataToTelegram)
+    return () => {
+      tg.offEvent('mainButtonClicked', sendDataToTelegram)
+    }
+  }, [sendDataToTelegram])
 
   // Обновление формы
   const handleChange = (event) => {
@@ -83,7 +77,7 @@ const Form = (props) => {
   return (
     <form className={styles.selecters}>
       <label>
-        Длина: {formData.length}
+        Длина1: {formData.length}
         <input
           className={styles.select_bar}
           type="range"
