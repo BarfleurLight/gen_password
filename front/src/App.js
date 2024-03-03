@@ -11,13 +11,14 @@ function App() {
   const {tg} = useTelegram();
 
   const sendDataToTelegram = () => {
-    tg.sendData('Password');
+    tg.close();
   }
 
   useEffect(() => {
     tg.ready();
     tg.MainButton.setParams({text: 'Создать шаблон'});
     tg.MainButton.show();
+    tg.expand();
     tg.onEvent('mainButtonClicked', sendDataToTelegram)
     return () => {
       tg.offEvent('mainButtonClicked', sendDataToTelegram)
