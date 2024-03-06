@@ -18,7 +18,6 @@ function App() {
   const mainBut = () => {
     if (swiper.activeIndex === 0) {
       swiper.slideNext();
-      tg.BackButton.isVisible(true)
       tg.BackButton.show()
       } else {
         // swiper.slidePrev();
@@ -27,7 +26,7 @@ function App() {
   }
 
   const backBut  = () => {
-    tg.BackButton.isVisible(false);
+    tg.BackButton.hide();
     swiper.slidePrev();
   }
 
@@ -36,13 +35,10 @@ function App() {
     tg.expand();
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
+    tg.BackButton.isVisible(true)
     tg.MainButton.onClick(mainBut);
     tg.BackButton.onClick(backBut);
     
-    // tg.onEvent('mainButtonClicked', sendDataToTelegram)
-    // return () => {
-    //   tg.offEvent('mainButtonClicked', sendDataToTelegram)
-    // }
   }, [mainBut, backBut])
 
   //Стандартные параметры паароля
@@ -58,7 +54,10 @@ function App() {
 
   return (
   <div className="App">
-    <Swiper className="mySwiper" 
+    <Swiper className="mySwiper"
+            noSwiping={true}
+            noSwipingSelector='input'
+            nested={true}
             onSwiper={(s) => {
             setSwiper(s);
             }}>

@@ -87,8 +87,6 @@ const Form = (props) => {
           step={range.step}
           value={formData.length}
           onChange={handleChange}
-          // onMouseDown={(e) => e.stopPropagation()}
-          // onMouseUp={(e) => e.stopPropagation()}
         />
       </label>
       <label>

@@ -32,30 +32,13 @@
 
 .select_bar {
   width: 100%;
-
-  -webkit-appearance: none;
-  appearance: none; 
-
-  width: 100%;
-  cursor: pointer;
-  outline: none;
-
-  overflow: hidden;
-  border-radius: 16px;
+  
 }
 
   input {
     width: 5%;
   }
 
-  
-  /* Track: webkit browsers */
-  input[type="range"]::-webkit-slider-runnable-track {
-    height: 20px;
-    background: #ccc;
-    border-radius: 20px;
-  }
-  
   
   button:hover {
     background-color: #45a049;
