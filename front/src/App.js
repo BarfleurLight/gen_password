@@ -35,7 +35,6 @@ function App() {
     tg.expand();
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
-    tg.BackButton.isVisible(true)
     tg.MainButton.onClick(mainBut);
     tg.BackButton.onClick(backBut);
     
