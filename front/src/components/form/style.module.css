@@ -32,26 +32,30 @@
 
 .select_bar {
   width: 100%;
+
+  -webkit-appearance: none;
+  appearance: none; 
+
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+
+  overflow: hidden;
+  border-radius: 16px;
 }
 
   input {
     width: 5%;
   }
 
-
-
-
-
-
-
-  /* button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  } */
+  
+  /* Track: webkit browsers */
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+  }
+  
   
   button:hover {
     background-color: #45a049;

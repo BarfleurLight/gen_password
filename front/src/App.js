@@ -2,6 +2,7 @@ import './App.css';
 import React, {useEffect, useState } from "react";
 import Form from './components/form';
 import Head from './components/head';
+import Name from './components/name';
 import {useTelegram} from './utils/tg/tg';
 import {defoltConsts} from './utils/consts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,6 +19,7 @@ function App() {
     if (swiper.activeIndex === 0) {
       swiper.slideNext();
       tg.BackButton.isVisible(true)
+      tg.BackButton.show()
       } else {
         // swiper.slidePrev();
         tg.close();
@@ -66,6 +68,7 @@ function App() {
       </SwiperSlide>
       <SwiperSlide virtualIndex={1}>        
         <Head pass={Password}/>
+        <Name />
         </SwiperSlide>
     </Swiper>
   </div>
