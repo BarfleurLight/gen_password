@@ -4,8 +4,8 @@
   display: block;
   height: 100%;
 
-  width: 100%;
-  /* width: 90%; */
+  /* width: 100%; */
+  width: 90%;
   
   max-width: 400px;
   margin: 0 auto;
@@ -14,7 +14,16 @@
   /* border-color:var(--tg-theme-secondary-bg-color); */
   /* border-radius: 25px; */
   /* border: 3px solid; */
+  
 }
+
+.test {
+  /* background-color: aqua; */
+  /* min-height: 100vmin; */
+  max-height: 65vh;
+  display: block;
+}
+
 
 
 
