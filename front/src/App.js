@@ -40,9 +40,9 @@ function App() {
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
     tg.MainButton.onClick(mainBut);
-    // tg.BackButton.onClick(backBut);
+    tg.BackButton.onClick(backBut);
     
-  }, [mainBut, backBut])
+  }, [])
 
   //Стандартные параметры паароля
   const {defolt_pass} = defoltConsts();
@@ -73,7 +73,7 @@ function App() {
           mousewheel={true}
           nested={true}
           modules={[FreeMode, Scrollbar, Mousewheel]}
-          className="test"
+          className="vertslider"
         >
           <SwiperSlide >
             <Form onSavePass={savePassword} pass={Password} />

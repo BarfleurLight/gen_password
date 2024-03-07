@@ -4,10 +4,11 @@
   display: block;
   height: 100%;
 
-  /* width: 100%; */
-  width: 90%;
+  width: 100%;
+  /* width: 90%; */
   
   max-width: 400px;
+  min-height: 500px;
   margin: 0 auto;
   color: var(--tg-theme-hint-color);
   /* background-color:var(--tg-theme-secondary-bg-color); */
@@ -17,10 +18,10 @@
   
 }
 
-.test {
+.vertslider {
   /* background-color: aqua; */
   /* min-height: 100vmin; */
-  max-height: 65vh;
+  max-height: 64vh;
   display: block;
 }
 
