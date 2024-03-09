@@ -1,6 +1,6 @@
 .head {
     background-color: var(--tg-theme-bg-color);
-    font-size: calc(32px + 2vmin);
+    font-size: 34px;
     display: block;
     margin: 0 auto;
     padding-top: 5%;
@@ -10,5 +10,6 @@
     word-wrap: break-word;
     top: 0px;
     border-radius: 25px;
+    max-height: 170px;
 
 }

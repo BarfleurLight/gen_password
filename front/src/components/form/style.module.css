@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 1vw;
-    font-size: calc(24px + 2vmin);
+    font-size: calc(24px + 1vmin);
     padding: 5%;
     padding-left: 5%;
     padding-right: 5%;

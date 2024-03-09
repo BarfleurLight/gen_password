@@ -1,8 +1,9 @@
 .example {
     /* background-color: var(--tg-theme-secondary-bg-color); */
     color: var(--tg-theme-text-color);
-    /* font-size: calc(32px + 2vmin); */
-    min-height: 20vh;
+    font-size: calc(20px +1vmin);
+    min-height: 100px;
+    /* max-height: 100px; */
     /* display: block;
     margin: 0 auto;
     padding-top: 5%;
