@@ -15,19 +15,6 @@ const Form = (props) => {
   const { rangeValueTable} = defoltConsts();
   const [range, setFromRange]= useState(rangeValueTable["0"]);
 
-  // const {tg} = useTelegram();
-
-  // const sendDataToTelegram = () => {
-  //   tg.sendData(formData);
-  // }
-
-  // useEffect(() => {
-  //   tg.onEvent('mainButtonClicked', sendDataToTelegram)
-  //   return () => {
-  //     tg.offEvent('mainButtonClicked', sendDataToTelegram)
-  //   }
-  // }, [sendDataToTelegram])
-
   // Обновление формы
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
