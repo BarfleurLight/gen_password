@@ -76,14 +76,16 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </label>
-      <label>
+      <label className={styles.test}>
         Цифры:
         <input
+          className={styles.testIn}
           type="checkbox"
           name="numbers"
           checked={formData.numbers}
           onChange={handleChange}
         />
+        <span className={styles.testSpan}></span>
       </label>
       <label>
         Заглавные буквы:

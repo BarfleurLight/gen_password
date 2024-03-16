@@ -39,7 +39,40 @@
     width: 5%;
   }
 
-  
-  button:hover {
-    background-color: #45a049;
+.test {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.testIn {
+  position: absolute;
+  opacity: 0;
+}
+
+.testSpan {
+  width: 20px;
+  height: 20px;
+  border: 2px;
+  border-color: brown;
+  display: flex;
+  background-color:blue;
+}
+
+.testSpan::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color:aqua;
+}
+input:checked{
+  &+.testSpan::after{
+    background-color:green;
   }
+}
+.testSpan::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color:aqua;
+}
