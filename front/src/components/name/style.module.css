@@ -6,11 +6,12 @@
     }
 
 .input {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 5px;
     border-color:var(--tg-theme-secondary-bg-color);
     border-radius: 25px;
     border: 1px solid;
     font-size: medium;
+    background-color: var(--tg-theme-bg-color);
     }

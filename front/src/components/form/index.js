@@ -76,52 +76,60 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </label>
-      <label className={styles.test}>
+      <label className={styles.ch_lb}>
         Цифры:
         <input
-          className={styles.testIn}
+          className={styles.ch_in}
           type="checkbox"
           name="numbers"
           checked={formData.numbers}
           onChange={handleChange}
         />
-        <span className={styles.testSpan}></span>
+        <span className={styles.ch_sp}></span>
       </label>
-      <label>
+      <label className={styles.ch_lb}>
         Заглавные буквы:
         <input
+          className={styles.ch_in}
           type="checkbox"
           name="uppercase"
           checked={formData.uppercase}
           onChange={handleChange}
         />
+        <span className={styles.ch_sp}></span>
       </label>
-      <label>
+      <label className={styles.ch_lb}>
         Строчные буквы:
         <input
+          className={styles.ch_in}
           type="checkbox"
           name="lowercase"
           checked={formData.lowercase}
           onChange={handleChange}
         />
+        <span className={styles.ch_sp}></span>
       </label>
-      <label>
+      <label className={styles.ch_lb}>
         Символы:
         <input
+          className={styles.ch_in}
           type="checkbox"
           name="symbols"
           checked={formData.symbols}
           onChange={handleChange}
         />
+        <span className={styles.ch_sp}></span>
       </label>
-      <label>
+      <label className={styles.ch_lb}>
         Разделитель:
         <input
+          className={styles.ch_in}
           type="checkbox"
           name="delimiter"
           checked={formData.delimiter}
           onChange={handleChange}
         />
+        <span className={styles.ch_sp}></span>
           {formData.delimiter && (
           <select
             name="delimiter_value"
