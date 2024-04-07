@@ -28,37 +28,30 @@ function App() {
   // }
 
   useEffect(() => {
-    console.log(swiper.activeIndex);
+    // console.log(swiper.activeIndex);
     tg.MainButton.onClick(() => {
-      // console.log(swiper.activeIndex);
+      console.log(swiper.activeIndex);
       if (swiper.activeIndex === 0) {
         swiper.slideNext();
       } else {
         tg.close()
       }
     });
-    
-    if (swiper.activeIndex === 0) {
-      tg.BackButton.hide();
-    } else {
-      tg.BackButton.show();
-      tg.MainButton.onClick(() => {
-        tg.BackButton.hide();
-        swiper.slidePrev();
-      });
-    }
   }, [tg, swiper])
 
-  // const backBut  = () => {
-  //   if (swiper.activeIndex === 0) {
-  //     tg.BackButton.hide();
-  //   } else {
-  //     tg.BackButton.show();
-  //     swiper.slidePrev();
-  //   }
-  //   swiper.slidePrev();
-  // }
+  useEffect(() => {
+    if (swiper === 0) {
+      if (swiper.activeIndex === 0) {
+      } else {
+        tg.BackButton.show()
+        tg.BackButton.onClick(() => {
+          swiper.slidePrev();
+        });
 
+      }
+    }
+    tg.BackButton.hide()
+  }, [tg, swiper])
 
   // const test = () => {
   //   if (swiper.activeIndex === 0) {
