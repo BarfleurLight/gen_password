@@ -3,6 +3,7 @@ import React, {useEffect, useState } from "react";
 import Form from './components/form';
 import Head from './components/head';
 import Name from './components/name';
+import Button from './components/button/button';
 import {useTelegram} from './utils/tg/tg';
 import {defoltConsts} from './utils/consts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,6 +34,11 @@ function App() {
     })
   };
 
+  const [Name_pass, setName_pass] = useState('');
+
+  const saveName = (initName) =>
+  {setName_pass(initName)};
+
   return (
   <div className="App">
     <Swiper className="mySwiper"
@@ -57,7 +63,8 @@ function App() {
       </SwiperSlide>
       <SwiperSlide virtualIndex={1}>        
         <Head pass={Password}/>
-        <Name />
+        <Name onSaveName={saveName} />
+        <Button pass={Password} name={Name_pass}/>
       </SwiperSlide>
     </Swiper>
   </div>

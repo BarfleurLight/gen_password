@@ -13,4 +13,5 @@
     border: 1px solid var(--tg-theme-hint-color, black);
     font-size: medium;
     background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-hint-color, rgb(0, 0, 0));
     }
