@@ -18,14 +18,12 @@ function App() {
   // Подключение MainButton
   const {tg} = useTelegram();
   
-  tg.MainButton.onClick(() => {
-    console.log(swiper.activeIndex);
-    if (swiper.activeIndex === 0) {
-      swiper.slideNext();
-    } else {
-      tg.close();
-    }
-  });
+  
+  useEffect(() => {
+    tg.MainButton.onClick(() => {
+      console.log(swiper.activeIndex);
+    });
+  }, [tg, swiper])
 
   // const backBut  = () => {
   //   if (swiper.activeIndex === 0) {
@@ -60,10 +58,6 @@ function App() {
     tg.expand();
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
-    // tg.MainButton.onClick(() => {
-    //   console.log('3')
-    // });
-    // tg.BackButton.onClick(backBut);
   }, [tg])
 
   //Стандартные параметры паароля
