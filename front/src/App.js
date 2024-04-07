@@ -18,11 +18,35 @@ function App() {
   // Подключение MainButton
   const {tg} = useTelegram();
   
-  
+  // const mainBut = () => {
+  //   console.log(swiper.activeIndex);
+  //     if (swiper.activeIndex === 0) {
+  //       swiper.slideNext();
+  //     } else {
+  //       tg.close()
+  //     }
+  // }
+
   useEffect(() => {
+    console.log(swiper.activeIndex);
     tg.MainButton.onClick(() => {
-      console.log(swiper.activeIndex);
+      // console.log(swiper.activeIndex);
+      if (swiper.activeIndex === 0) {
+        swiper.slideNext();
+      } else {
+        tg.close()
+      }
     });
+    
+    if (swiper.activeIndex === 0) {
+      tg.BackButton.hide();
+    } else {
+      tg.BackButton.show();
+      tg.MainButton.onClick(() => {
+        tg.BackButton.hide();
+        swiper.slidePrev();
+      });
+    }
   }, [tg, swiper])
 
   // const backBut  = () => {
@@ -34,11 +58,7 @@ function App() {
   //   }
   //   swiper.slidePrev();
   // }
-  // const mainBut1 = () => {
-  //   tg.close()
-  //     swiper.slidePrev();
-  //     tg.BackButton.show();
-  // }
+
 
   // const test = () => {
   //   if (swiper.activeIndex === 0) {
