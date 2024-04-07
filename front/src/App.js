@@ -20,9 +20,13 @@ function App() {
 
   const mainBut = () => {
     swiper.slideNext();
-    console.log(swiper.activeIndex)
+    console.log('1')
   }
 
+  tg.MainButton.onClick(() => {
+    console.log('2');
+    swiper.slideNext();
+  });
   // const backBut  = () => {
   //   if (swiper.activeIndex === 0) {
   //     tg.BackButton.hide();
@@ -56,7 +60,9 @@ function App() {
     tg.expand();
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
-    tg.MainButton.onClick(mainBut);
+    tg.MainButton.onClick(() => {
+      console.log('3')
+    });
     // tg.BackButton.onClick(backBut);
   }, [])
 
