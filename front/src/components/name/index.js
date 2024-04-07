@@ -15,12 +15,12 @@ const Name = (props) => {
         if (swiper.activeIndex === 1) {
             tg.close();
         } else {
-            swiper.slideNext();
+            swiper.slideNext("speed:", 10);
         }
     };
 
     const backBut = () => {
-        swiper.slidePrev("speed:", 50);
+        swiper.slidePrev("speed:", 10);
         tg.BackButton.hide();
     };
 
