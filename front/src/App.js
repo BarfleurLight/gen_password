@@ -19,22 +19,19 @@ function App() {
   const {tg} = useTelegram();
 
   const mainBut = () => {
-    if (swiper.activeIndex === 0) {
-      swiper.slideNext();
-    } else {
-      tg.close();
-    }
+    swiper.slideNext();
+    console.log(swiper.activeIndex)
   }
 
-  const backBut  = () => {
-    if (swiper.activeIndex === 0) {
-      tg.BackButton.hide();
-    } else {
-      tg.BackButton.show();
-      swiper.slidePrev();
-    }
-    // swiper.slidePrev();
-  }
+  // const backBut  = () => {
+  //   if (swiper.activeIndex === 0) {
+  //     tg.BackButton.hide();
+  //   } else {
+  //     tg.BackButton.show();
+  //     swiper.slidePrev();
+  //   }
+  //   swiper.slidePrev();
+  // }
   // const mainBut1 = () => {
   //   tg.close()
   //     swiper.slidePrev();
@@ -60,7 +57,7 @@ function App() {
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
     tg.MainButton.onClick(mainBut);
-    tg.BackButton.onClick(backBut);
+    // tg.BackButton.onClick(backBut);
   }, [])
 
   //Стандартные параметры паароля
