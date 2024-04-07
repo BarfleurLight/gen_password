@@ -9,38 +9,40 @@ const Name = (props) => {
     const {tg} = useTelegram();
     const swiper = useSwiper();
 
+
     
-    const mainBut = (s) => {
-        if (s.sactiveIndex === 0) {
-            s.slideNext();
+    const mainBut = () => {
+        if (swiper.activeIndex === 1) {
+            tg.close();
         } else {
-            tg.close()
+            swiper.slideNext();
         }
     };
 
-    const backBut = (s) => {
-        console.log(swiper.activeIndex);
-        s.slidePrev("speed:", 50);
+    const backBut = () => {
+        swiper.slidePrev("speed:", 50);
         tg.BackButton.hide();
     };
 
-    const updateButton = (s) => {
-        if (swiper.activeIndex === 0) {
-            tg.MainButton.onClick(mainBut(s));
-            tg.BackButton.hide()
-        } else {            
+    const updateButton = () => {
+        if (swiper.activeIndex === 1) {
             tg.BackButton.show()
+            tg.MainButton.onClick(mainBut);
+        } else {        
+            tg.MainButton.onClick(mainBut);
+            tg.BackButton.hide()
         }
     }
 
     useEffect(() => {
-        updateButton(swiper);
-        tg.BackButton.onClick(backBut(swiper));
+        tg.BackButton.onClick(backBut);
+        tg.MainButton.onClick(mainBut);
         swiper.on('slideChange', function () {
             // console.log(swiper.activeIndex);
-            updateButton(swiper);
+            updateButton();
           });
-    }, [swiper]);
+    }, [tg, swiper]);
+
     
 
 
