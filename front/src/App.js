@@ -12,59 +12,8 @@ import 'swiper/css/scrollbar';
 import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
 
 function App() {
-  
-  const [swiper, setSwiper] = React.useState(0);
 
-  // Подключение MainButton
   const {tg} = useTelegram();
-  
-  // const mainBut = () => {
-  //   console.log(swiper.activeIndex);
-  //     if (swiper.activeIndex === 0) {
-  //       swiper.slideNext();
-  //     } else {
-  //       tg.close()
-  //     }
-  // }
-
-  useEffect(() => {
-    // console.log(swiper.activeIndex);
-    tg.MainButton.onClick(() => {
-      console.log(swiper.activeIndex);
-      if (swiper.activeIndex === 0) {
-        swiper.slideNext();
-      } else {
-        tg.close()
-      }
-    });
-  }, [tg, swiper])
-
-  useEffect(() => {
-    if (swiper === 0) {
-      if (swiper.activeIndex === 0) {
-      } else {
-        tg.BackButton.show()
-        tg.BackButton.onClick(() => {
-          swiper.slidePrev();
-        });
-
-      }
-    }
-    tg.BackButton.hide()
-  }, [tg, swiper])
-
-  // const test = () => {
-  //   if (swiper.activeIndex === 0) {
-  //     tg.MainButton.onClick();
-  //     tg.BackButton.hide();
-  //   } else {
-  //     tg.MainButton.setParams({text: 'Готово'});
-  //     tg.MainButton.onClick(mainBut1);
-  //     tg.BackButton.show();
-  //   }
-  // }
-
-
 
   useEffect(() => {
     tg.ready();
@@ -89,10 +38,7 @@ function App() {
     <Swiper className="mySwiper"
             noSwiping={true}
             noSwipingSelector='input'
-            nested={true}
-            onSwiper={(s) => {
-            setSwiper(s);
-            }}>
+            nested={true}>
       <SwiperSlide virtualIndex={0}>
         <Head pass={Password} slot="container-start"/>
         <Swiper 
