@@ -13,20 +13,20 @@ import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
 
 function App() {
   
-  const [swiper, setSwiper] = React.useState(null);
+  const [swiper, setSwiper] = React.useState(0);
 
   // Подключение MainButton
   const {tg} = useTelegram();
-
-  const mainBut = () => {
-    swiper.slideNext();
-    console.log('1')
-  }
-
+  
   tg.MainButton.onClick(() => {
-    console.log('2');
-    swiper.slideNext();
+    console.log(swiper.activeIndex);
+    if (swiper.activeIndex === 0) {
+      swiper.slideNext();
+    } else {
+      tg.close();
+    }
   });
+
   // const backBut  = () => {
   //   if (swiper.activeIndex === 0) {
   //     tg.BackButton.hide();
@@ -60,11 +60,11 @@ function App() {
     tg.expand();
     tg.MainButton.setParams({text: 'Далее'});
     tg.MainButton.show();
-    tg.MainButton.onClick(() => {
-      console.log('3')
-    });
+    // tg.MainButton.onClick(() => {
+    //   console.log('3')
+    // });
     // tg.BackButton.onClick(backBut);
-  }, [])
+  }, [tg])
 
   //Стандартные параметры паароля
   const {defolt_pass} = defoltConsts();
