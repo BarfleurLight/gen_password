@@ -50,8 +50,9 @@ if __name__ == "__main__":
             on_startup=[on_startup],
             on_shutdown=[on_shutdown])
 
-        @app.post('/template')
-        async def template_response():
+        @app.post('/webhook/template')
+        async def template_response(test: str):
+            print(test)
             return {'status': 200}
 
         @app.post('/webhook')

@@ -54,12 +54,12 @@ const Button = (props) => {
       'pass': props.pass
     }
 
-    var response = fetch('https://obrishti.ddns.net/template', {
+    var response = fetch('https://obrishti.ddns.net/webhook/template', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({test: 'Hello Mark'})
     })
 
     response.catch((err) => {
