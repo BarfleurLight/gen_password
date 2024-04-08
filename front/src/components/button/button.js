@@ -7,7 +7,13 @@ const Button = (props) => {
   const {tg} = useTelegram();
   const swiper = useSwiper();
 
-  const id = tg.initDataUnsafe.id
+
+  try {
+    var id = tg.initDataUnsafe.user.id
+  } catch (err) {
+    var id = 'Error'
+  }
+
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
           tg.close();
