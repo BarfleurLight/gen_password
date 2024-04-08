@@ -26,9 +26,9 @@ async def on_startup() -> None:
     print('Старт')
     if DEBUG:
         await bot.delete_webhook()
-    else:    
+    else:
         await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}",
-                                secret_token=WEBHOOK_SECRET)
+                              secret_token=WEBHOOK_SECRET)
     await client_commands.set_all_commands(bot)
 
 
@@ -49,8 +49,7 @@ if __name__ == "__main__":
             docs_url=None,
             on_startup=[on_startup],
             on_shutdown=[on_shutdown])
-        
-        @app.post ('/webhook')
+        @app.post('/webhook')
         async def webhook_response(update: dict):
             return await dp.feed_update(
                     bot=bot, update=Update(**update))

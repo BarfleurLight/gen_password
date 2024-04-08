@@ -1,5 +1,4 @@
-// import styles from './style.module.css'
-import React, { useEffect} from 'react';
+import { useEffect } from 'react';
 import { useSwiper } from "swiper/react";
 import {useTelegram} from '../../utils/tg/tg';
 
@@ -8,25 +7,25 @@ const Button = (props) => {
   const {tg} = useTelegram();
   const swiper = useSwiper();
 
+  const id = tg.initDataUnsafe.id
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
           tg.close();
       } else {
-          swiper.slideNext("speed:", 100);
+        swiper.slideNext("speed:", 400);
       }
   };
 
   const backBut = () => {
-      swiper.slidePrev("speed:", 100);
+      swiper.slidePrev("speed:", 400);
       tg.BackButton.hide();
   };
 
   const updateButton = () => {
       if (swiper.activeIndex === 1) {
-        console.log(swiper.activeIndex);
         tg.BackButton.show()
         tg.MainButton.onClick(mainBut);
-      } else { 
+      } else {
         tg.MainButton.onClick(mainBut);
         tg.BackButton.hide()
       }
@@ -36,6 +35,7 @@ const Button = (props) => {
       tg.BackButton.onClick(backBut);
       tg.MainButton.onClick(mainBut);
       swiper.on('slideChange', function () {
+          console.log(id)
           // console.log(swiper.activeIndex);
           updateButton();
         });

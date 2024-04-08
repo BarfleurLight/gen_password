@@ -72,21 +72,6 @@ class Gen_Pass:
             return self.create_pass()
         return 'Неправильные параметры'
 
-        
-        
-# qwrq-qwrq
-# qwrq-qwrq-rerg
-# qwrq-qwrq-rerg
-# qwrq-qwrq-rerg-rerg
-# qwrq-qwrq-rerg-rerg
-
-# grhrd-dfgrd
-# grhrd-dfgrd-rgwer
-# grhrd-dfgrd-rgwer-dfgrd
-# atelgk-asdweq
-# atelgk-asdweq-atelgk
-# atelgk-asdweq-atelgk-asdweq
-
 example = {
     'length': 23,
     'numbers': True,
@@ -96,7 +81,3 @@ example = {
     'delimiter': True,
     'delimiter_value': 5
     }
-
-# print(Gen_Pass(**example).main())
-# print(Gen_Pass(**example).main())
-# print(Gen_Pass(**example).main())
