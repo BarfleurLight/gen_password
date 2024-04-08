@@ -4,26 +4,23 @@ import {useTelegram} from '../../utils/tg/tg';
 
 
 const Button = (props) => {
+
   const {tg} = useTelegram();
   const swiper = useSwiper();
+  const id = tg.initDataUnsafe.user?.id;
 
-
-  try {
-    var id = tg.initDataUnsafe.user.id
-  } catch (err) {
-    var id = 'Error'
-  }
 
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
+          sendData(props);
           tg.close();
       } else {
-        swiper.slideNext("speed:", 400);
+        swiper.slideNext("speed:", 900);
       }
   };
 
   const backBut = () => {
-      swiper.slidePrev("speed:", 400);
+      swiper.slidePrev("speed:", 900);
       tg.BackButton.hide();
   };
 
@@ -47,9 +44,30 @@ const Button = (props) => {
         });
   }, [tg, swiper]);
 
-  const sendData = () => {
+  const sendData = (props) => {
+    if (id === undefined) {
+      return console.log('Errror get_id')
+    }
+    const data = {
+      'id': id,
+      'name_pass': props.name,
+      'pass': props.pass
+    }
+
+    var response = fetch('https://obrishti.ddns.net/template', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+
+    response.catch((err) => {
+      console.log(err.message);
+   });
 
   }
+
 }
 
 

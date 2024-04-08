@@ -34,10 +34,11 @@ def get_user(id):
     sessions.commit()
     return user
 
+
 def get_user_password(user):
     ls_pass = user.passwords
     return [i.name_pass for i in ls_pass]
-    
+
 
 def get_default_pass():
     def_pass = sessions.get(Passwords, 1)
@@ -46,7 +47,6 @@ def get_default_pass():
     def_pass = Passwords(**default_pass)
     sessions.add(def_pass)
     sessions.commit()
-
 
 
 def main_test():
