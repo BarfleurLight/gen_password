@@ -1,6 +1,7 @@
 import os, asyncio, uvicorn
 from aiogram.types import Update
 from fastapi import FastAPI
+from api.response import Data
 
 from bot_init import bot, dp
 
@@ -51,8 +52,8 @@ if __name__ == "__main__":
             on_shutdown=[on_shutdown])
 
         @app.post('/webhook/template')
-        async def template_response(test: str):
-            print(test)
+        async def template_response(data: Data):
+            print(data, type(data))
             return {'status': 200}
 
         @app.post('/webhook')

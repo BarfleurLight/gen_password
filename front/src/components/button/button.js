@@ -38,7 +38,6 @@ const Button = (props) => {
       tg.BackButton.onClick(backBut);
       tg.MainButton.onClick(mainBut);
       swiper.on('slideChange', function () {
-          console.log(id)
           // console.log(swiper.activeIndex);
           updateButton();
         });
@@ -51,7 +50,7 @@ const Button = (props) => {
     const data = {
       'id': id,
       'name_pass': props.name,
-      'pass': props.pass
+      'password': props.pass
     }
 
     var response = fetch('https://obrishti.ddns.net/webhook/template', {
@@ -59,7 +58,7 @@ const Button = (props) => {
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify({test: 'Hello Mark'})
+      body: JSON.stringify(data)
     })
 
     response.catch((err) => {
