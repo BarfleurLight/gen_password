@@ -7,12 +7,13 @@ const Button = (props) => {
 
   const {tg} = useTelegram();
   const swiper = useSwiper();
+  const [activeIndex, setActiveIndex] = useState(swiper.activeIndex)
 
   // const id = useState(tg.initDataUnsafe.user?.id);
-  const name_pass= useState(props.name);
-  const password = useState(props.pass);
+  // const name_pass= useState(props.name);
+  // const [password] = useState(props.pass);
 
-  const [activeIndex, setActiveIndex] = useState(swiper.activeIndex)
+
 
 
   // const id = tg.initDataUnsafe.user?.id;
@@ -28,11 +29,11 @@ const Button = (props) => {
   const updateData = useCallback(() => {
     const data = {
         'id': tg.initDataUnsafe.user?.id,
-        'name_pass': name_pass,
-        'password': password
+        'name_pass': props.name,
+        'password': props.pass
       }
       return data
-  }, [tg, name_pass, password]);
+  }, [tg, props]);
 
 
   const changeColor = () => {
@@ -60,12 +61,13 @@ const Button = (props) => {
   // MainButton
   useEffect(() => {
     const data = updateData()
+    console.log('data1', data)
     const sendData = () => {
       if (data.id === undefined) {
         return console.log('Errror get_id')
       }
 
-      console.log(data)
+      console.log('data_ into sendData', data);
   
       var response = fetch('https://obrishti.ddns.net/webhook/template', {
         method: 'POST',
@@ -78,14 +80,15 @@ const Button = (props) => {
       response.catch((err) => {
         console.log(err.message);
      });
-  
     }
 
     const mainBut = () => {
-      if (swiper.activeIndex === 1) {
+      if (activeIndex === 1) {
         if (data.name_pass === '') {
+          console.log('MB_None')
           changeColor();
         } else {
+          console.log('Ok')
           sendData();
           tg.close();
         }
@@ -98,17 +101,11 @@ const Button = (props) => {
 
   // BackButton
 useEffect(() => {
-  const backBut = () => {
-    console.log('test0')
-    swiper.slidePrev("speed:", 900);
-    tg.BackButton.hide();
-    };
   if (activeIndex === 1) {
-    console.log('test1')
+    console.log('swipe1')
     tg.BackButton.show()
-    tg.MainButton.onClick(backBut);
   } else {
-    console.log('test2')
+    console.log('swipe0')
     tg.BackButton.hide()
   }
 }, [tg, swiper, activeIndex]);
@@ -126,10 +123,18 @@ useEffect(() => {
   // }
   
   useEffect(() => {
+    const backBut = () => {
+      console.log('test0')
+      swiper.slidePrev("speed:", 900);
+      tg.BackButton.hide();
+      };
+    tg.MainButton.onClick(backBut);
+
     swiper.on('slideChange',() => {
       setActiveIndex(swiper.activeIndex)
     });
-    }, [swiper]);
+
+    }, [tg, swiper]);
 
   
   // const sendData = () => {
