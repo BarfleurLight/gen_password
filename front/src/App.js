@@ -3,7 +3,7 @@ import React, {useEffect, useState } from "react";
 import Form from './components/form';
 import Head from './components/head';
 import Name from './components/name';
-import Button from './components/button/button';
+import Button from './components/button';
 import {useTelegram} from './utils/tg/tg';
 import {defoltConsts} from './utils/consts'
 import { Swiper, SwiperSlide } from "swiper/react";

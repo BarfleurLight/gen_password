@@ -17,15 +17,16 @@ const Button = (props) => {
     const oldColor = name.style.borderColor;
     name.style.borderColor = 'red';
     setTimeout(() =>
-    name.style.borderColor = oldColor, 2000);    
+    name.style.borderColor = oldColor, 1000);    
 };
 
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
+          console.log(id, name_pass, password)
           if (name_pass === '') {
             changeColor();
           } else {
-            sendData();
+            sendData(id, name_pass, password);
             tg.close();
           }
       } else {
@@ -48,6 +49,10 @@ const Button = (props) => {
       }
   }
 
+  // useEffect(() => {
+
+  // });
+
   useEffect(() => {
       tg.BackButton.onClick(backBut);
       tg.MainButton.onClick(mainBut);
@@ -55,7 +60,7 @@ const Button = (props) => {
   }, [tg, swiper, name_pass, password]); // eslint-disable-line react-hooks/exhaustive-deps
 
   
-  const sendData = () => {
+  const sendData = (id, name_pass, password) => {
     if (id === undefined) {
       return console.log('Errror get_id')
     }
@@ -79,7 +84,6 @@ const Button = (props) => {
    });
 
   }
-
 }
 
 
