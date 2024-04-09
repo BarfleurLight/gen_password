@@ -14,4 +14,5 @@
     font-size: medium;
     background-color: var(--tg-theme-bg-color);
     color: var(--tg-theme-hint-color, rgb(0, 0, 0));
+    transition: border-color 1s;
     }

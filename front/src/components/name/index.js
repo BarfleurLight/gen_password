@@ -14,6 +14,7 @@ const Name = (props) => {
       return (
         <div className={styles.nameform}>
             <input
+                id = 'name'
                 className={styles.input} 
                 type='text' 
                 placeholder={'Название шаблона'}

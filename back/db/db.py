@@ -1,6 +1,6 @@
 from db.db_init import Users, sessions, Passwords, User_Password
-from sqlalchemy import select
-from sqlalchemy.orm import selectinload
+# from sqlalchemy import select
+# from sqlalchemy.orm import selectinload
 
 default_pass = {
     'length': 14,
@@ -82,30 +82,18 @@ def main_test():
     # mark.name_pass ='Default'
     # vasya.passwords.append(def_pass, name_pass='Default')
 
-
-
-
-    
-
-
-
     # defdult_pass = sessions.get(Passwords, 1)
     # print(defdult_pass)
 
     # if defdult_pass:
     #     return None
-    # def_pass = Passwords(**example) 
-    #    
+    # def_pass = Passwords(**example)
     # def_user_pass = User_Password(name_pass='Default')
-    
+
     # mark.user_passwords.append(def_user_pass)
     # def_pass.passs.append(def_user_pass)
 
-
     # sessions.add(def_user_pass)
-    
-
-
 
     # us = sessions.get(Users, 1)
     # print(us.user_passwords)
