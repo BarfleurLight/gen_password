@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSwiper } from "swiper/react";
 import { useTelegram } from '../../utils/tg/tg';
 
@@ -9,8 +9,17 @@ const Button = (props) => {
   const swiper = useSwiper();
 
   const id = tg.initDataUnsafe.user?.id;
-  const name_pass = props.name
-  const password = props.pass
+
+  const name_pass = useState(props.name)
+  const password = useState(props.pass)
+
+  const data = {
+    'id': id,
+    'name_pass': name_pass,
+    'password': password
+  }
+
+
 
   const changeColor = () => {
     const name = document.getElementById("name");
@@ -18,15 +27,15 @@ const Button = (props) => {
     name.style.borderColor = 'red';
     setTimeout(() =>
     name.style.borderColor = oldColor, 1000);    
-};
+  };
+
 
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
-          console.log(id, name_pass, password)
           if (name_pass === '') {
             changeColor();
           } else {
-            sendData(id, name_pass, password);
+            sendData(data);
             tg.close();
           }
       } else {
@@ -49,27 +58,19 @@ const Button = (props) => {
       }
   }
 
-  // useEffect(() => {
-
-  // });
 
   useEffect(() => {
-      tg.BackButton.onClick(backBut);
-      tg.MainButton.onClick(mainBut);
-      swiper.on('slideChange', updateButton);
-  }, [tg, swiper, name_pass, password]); // eslint-disable-line react-hooks/exhaustive-deps
+    tg.MainButton.onClick(mainBut);
+    tg.BackButton.onClick(backBut);
+    swiper.on('slideChange', updateButton);
+  }, [tg, swiper, name_pass]);
 
   
-  const sendData = (id, name_pass, password) => {
+  const sendData = (data) => {
     if (id === undefined) {
       return console.log('Errror get_id')
     }
-
-    const data = {
-      'id': id,
-      'name_pass': name_pass,
-      'password': password
-    }
+    console.log(data)
 
     var response = fetch('https://obrishti.ddns.net/webhook/template', {
       method: 'POST',
