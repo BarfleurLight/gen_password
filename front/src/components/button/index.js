@@ -91,24 +91,34 @@ const Button = (props) => {
       response.catch((err) => {
         console.log(err.message);
      });
-    }
+    };
 
-    const mainBut = () => {
-      console.log('mainBut', data)
-      if (activeIndex === 1) {
-        if (data.name_pass === '') {
-          console.log('MB_None')
-          changeColor();
-        } else {
-          console.log('Ok')
-          sendData(data);
-          tg.close();
-        }
+    const mainBut0 = (data) => {
+      if (data.name_pass === '') {
+        console.log('MB_None')
+        changeColor();
       } else {
-        swiper.slideNext("speed:", 900);
+        console.log('Ok')
+        sendData(data);
+        tg.close();
       }
     };
-    tg.MainButton.onClick(mainBut);
+
+    const mainBut1 = () => {
+      swiper.slideNext("speed:", 900);
+    };
+
+  if (activeIndex === 1) {
+      console.log('testsssssss0')
+      tg.MainButton.onClick(() => {
+        mainBut0(data)
+      });
+    } else {
+      console.log('testsssssss1')
+      tg.MainButton.onClick(() => {
+        mainBut1()
+      });
+    }
   }, [tg, swiper, activeIndex, data]);
 
   // BackButton
