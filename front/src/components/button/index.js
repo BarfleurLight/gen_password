@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSwiper } from "swiper/react";
 import { useTelegram } from '../../utils/tg/tg';
 
@@ -13,8 +13,21 @@ const Button = (props) => {
   // const name_pass= useState(props.name);
   // const [password] = useState(props.pass);
 
+  const [data, setData] = useState({
+    'id': tg.initDataUnsafe.user?.id,
+    'name_pass': props.name,
+    'password': props.pass
+  })
 
-
+  useEffect(() => {
+    setData(
+      {
+        'id': tg.initDataUnsafe.user?.id,
+        'name_pass': props.name,
+        'password': props.pass
+      }
+    )
+    }, [tg, props]);
 
   // const id = tg.initDataUnsafe.user?.id;
 
@@ -26,14 +39,14 @@ const Button = (props) => {
   //   'name_pass': props.name,
   //   'password': props.pass
   // }
-  const updateData = useCallback(() => {
-    const data = {
-        'id': tg.initDataUnsafe.user?.id,
-        'name_pass': props.name,
-        'password': props.pass
-      }
-      return data
-  }, [tg, props]);
+  // const updateData = useCallback(() => {
+  //   const data = {
+  //       'id': tg.initDataUnsafe.user?.id,
+  //       'name_pass': props.name,
+  //       'password': props.pass
+  //     }
+  //     return data
+  // }, [tg, props]);
 
 
   const changeColor = () => {
@@ -81,8 +94,7 @@ const Button = (props) => {
     }
 
     const mainBut = () => {
-      const data = updateData()
-      console.log('data1', data)
+      console.log('mainBut', data)
       if (activeIndex === 1) {
         if (data.name_pass === '') {
           console.log('MB_None')
@@ -97,7 +109,7 @@ const Button = (props) => {
       }
     };
     tg.MainButton.onClick(mainBut);
-  }, [tg, swiper, updateData, activeIndex]);
+  }, [tg, swiper, activeIndex, data]);
 
   // BackButton
 useEffect(() => {
