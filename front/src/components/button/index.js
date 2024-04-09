@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { useSwiper } from "swiper/react";
 import { useTelegram } from '../../utils/tg/tg';
 
@@ -10,15 +10,8 @@ const Button = (props) => {
 
   const id = tg.initDataUnsafe.user?.id;
 
-  const name_pass = useState(props.name)
-  const password = useState(props.pass)
-
-  const data = {
-    'id': id,
-    'name_pass': name_pass,
-    'password': password
-  }
-
+  const name_pass = createContext(props.name)
+  const password = createContext(props.pass)
 
 
   const changeColor = () => {
@@ -32,10 +25,10 @@ const Button = (props) => {
 
   const mainBut = () => {
       if (swiper.activeIndex === 1) {
-          if (name_pass === '') {
+          if (name_pass.Provider === '') {
             changeColor();
           } else {
-            sendData(data);
+            sendData();
             tg.close();
           }
       } else {
@@ -63,12 +56,18 @@ const Button = (props) => {
     tg.MainButton.onClick(mainBut);
     tg.BackButton.onClick(backBut);
     swiper.on('slideChange', updateButton);
-  }, [tg, swiper, name_pass]);
+  }, [tg, swiper]);
 
   
-  const sendData = (data) => {
+  const sendData = () => {
     if (id === undefined) {
       return console.log('Errror get_id')
+    }
+
+    const data = {
+      'id': id,
+      'name_pass': name_pass.Provider,
+      'password': password.Provider
     }
     console.log(data)
 
