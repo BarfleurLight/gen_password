@@ -9,12 +9,16 @@ const Button = (props) => {
   const swiper = useSwiper();
   const [activeIndex, setActiveIndex] = useState(swiper.activeIndex)
 
+  const id = tg.initDataUnsafe.user?.id;
+
+  
+
   // const id = useState(tg.initDataUnsafe.user?.id);
   // const name_pass= useState(props.name);
   // const [password] = useState(props.pass);
 
   const [data, setData] = useState({
-    'id': tg.initDataUnsafe.user?.id,
+    'id': id,
     'name_pass': props.name,
     'password': props.pass
   })
@@ -22,12 +26,12 @@ const Button = (props) => {
   useEffect(() => {
     setData(
       {
-        'id': tg.initDataUnsafe.user?.id,
+        'id': id,
         'name_pass': props.name,
         'password': props.pass
       }
     )
-    }, [tg, props]);
+    }, [id, props]);
 
   // const id = tg.initDataUnsafe.user?.id;
 
@@ -58,68 +62,70 @@ const Button = (props) => {
   };
 
 
-  // const mainBut = () => {
-  //     if (swiper.activeIndex === 1) {
-  //         if (name_pass === '') {
-  //           changeColor();
-  //         } else {
-  //           sendData();
-  //           tg.close();
-  //         }
-  //     } else {
-  //       swiper.slideNext("speed:", 900);
-  //     }
-  // };
+  const mainBut = () => {
+      if (activeIndex === 1) {
+          if (data.name_pass === '') {
+            changeColor();
+          } else {
+            sendData(data);
+            tg.close();
+          }
+      } else {
+        swiper.slideNext("speed:", 900);
+      }
+  };
+
+  tg.MainButton.onClick(mainBut)
 
   // MainButton
-  useEffect(() => {
-    const sendData = (data) => {
-      if (data.id === undefined) {
-        return console.log('Errror get_id')
-      }
+  // useEffect(() => {
+  //   const sendData = (data) => {
+  //     if (data.id === undefined) {
+  //       return console.log('Errror get_id')
+  //     }
 
-      console.log('data_ into sendData', data);
+  //     console.log('data_ into sendData', data);
   
-      var response = fetch('https://obrishti.ddns.net/webhook/template', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(data)
-      })
+  //     var response = fetch('https://obrishti.ddns.net/webhook/template', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json;charset=utf-8'
+  //       },
+  //       body: JSON.stringify(data)
+  //     })
   
-      response.catch((err) => {
-        console.log(err.message);
-     });
-    };
+  //     response.catch((err) => {
+  //       console.log(err.message);
+  //    });
+  //   };
 
-    const mainBut0 = (data) => {
-      if (data.name_pass === '') {
-        console.log('MB_None')
-        changeColor();
-      } else {
-        console.log('Ok')
-        sendData(data);
-        tg.close();
-      }
-    };
+  //   const mainBut0 = (data) => {
+  //     if (data.name_pass === '') {
+  //       console.log('MB_None')
+  //       changeColor();
+  //     } else {
+  //       console.log('Ok')
+  //       sendData(data);
+  //       tg.close();
+  //     }
+  //   };
 
-    const mainBut1 = () => {
-      swiper.slideNext("speed:", 900);
-    };
+  //   const mainBut1 = () => {
+  //     swiper.slideNext("speed:", 900);
+  //   };
 
-  if (activeIndex === 1) {
-      console.log('testsssssss0')
-      tg.MainButton.onClick(() => {
-        mainBut0(data)
-      });
-    } else {
-      console.log('testsssssss1')
-      tg.MainButton.onClick(() => {
-        mainBut1()
-      });
-    }
-  }, [tg, swiper, activeIndex, data]);
+  // if (activeIndex === 1) {
+  //     console.log('testsssssss0')
+  //     tg.MainButton.onClick(() => {
+  //       mainBut0(data)
+  //     });
+  //   } else {
+  //     console.log('testsssssss1')
+  //     tg.MainButton.onClick(() => {
+  //       mainBut1()
+  //     });
+  //   }
+  // }, [tg, swiper, activeIndex, data]);
 
   // BackButton
 useEffect(() => {
@@ -158,32 +164,31 @@ useEffect(() => {
 
     }, [tg, swiper]);
 
-  
-  // const sendData = () => {
-  //   if (id === undefined) {
-  //     return console.log('Errror get_id')
-  //   }
 
-  //   const data = {
-  //     'id': id,
-  //     'name_pass': name_pass,
-  //     'password': password
-  //   }
-  //   console.log(data)
+  // useEffect(() => {
+  //   tg.MainButton.onClick(mainBut)
+  // }, []);
 
-  //   var response = fetch('https://obrishti.ddns.net/webhook/template', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8'
-  //     },
-  //     body: JSON.stringify(data)
-  //   })
 
-  //   response.catch((err) => {
-  //     console.log(err.message);
-  //  });
+  const sendData = () => {
+    if (id === undefined) {
+      return console.log('Errror get_id')
+    }
+    console.log(data)
 
-  // }
+    var response = fetch('https://obrishti.ddns.net/webhook/template', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+
+    response.catch((err) => {
+      console.log(err.message);
+   });
+
+  }
 }
 
 
