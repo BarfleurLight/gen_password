@@ -60,9 +60,7 @@ const Button = (props) => {
 
   // MainButton
   useEffect(() => {
-    const data = updateData()
-    console.log('data1', data)
-    const sendData = () => {
+    const sendData = (data) => {
       if (data.id === undefined) {
         return console.log('Errror get_id')
       }
@@ -83,13 +81,15 @@ const Button = (props) => {
     }
 
     const mainBut = () => {
+      const data = updateData()
+      console.log('data1', data)
       if (activeIndex === 1) {
         if (data.name_pass === '') {
           console.log('MB_None')
           changeColor();
         } else {
           console.log('Ok')
-          sendData();
+          sendData(data);
           tg.close();
         }
       } else {
@@ -128,7 +128,7 @@ useEffect(() => {
       swiper.slidePrev("speed:", 900);
       tg.BackButton.hide();
       };
-    tg.MainButton.onClick(backBut);
+    tg.BackButton.onClick(backBut);
 
     swiper.on('slideChange',() => {
       setActiveIndex(swiper.activeIndex)
