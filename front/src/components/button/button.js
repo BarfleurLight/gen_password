@@ -52,7 +52,7 @@ const Button = (props) => {
       tg.BackButton.onClick(backBut);
       tg.MainButton.onClick(mainBut);
       swiper.on('slideChange', updateButton);
-  }, [tg, swiper]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tg, swiper, name_pass, password]); // eslint-disable-line react-hooks/exhaustive-deps
 
   
   const sendData = () => {
