@@ -78,7 +78,7 @@ const Button = (props) => {
   // tg.MainButton.onClick(mainBut)
 
   useEffect(() => {
-    const sendData = (data) => {
+    const sendData = () => {
       if (data.id === undefined) {
         return console.log('Errror get_id')
       }
@@ -98,22 +98,25 @@ const Button = (props) => {
      });
     };
 
-    const mainBut = (data) => {
+    const mainBut = () => {
+      console.log('INtomainBut', data);
       if (activeIndex === 1) {
         if (data.name_pass === '') {
           console.log('MB_None')
           changeColor();
         } else {
           console.log('Ok')
-          sendData(data);
+          sendData();
           tg.close();
         }
       } else {
         swiper.slideNext("speed:", 900);
       }
     };
+    console.log('install MmainBut', data);
     tg.MainButton.onClick(mainBut);
     return () => {
+      console.log('off MainBut');
       tg.MainButton.offClick(mainBut);
     };
 
