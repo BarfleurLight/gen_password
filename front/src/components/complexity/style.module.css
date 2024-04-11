@@ -1,5 +1,17 @@
- .progress {
-    display: block;
-    width: 100%;
-    /* margin: 0 auto; */
+
+.progressbar_div{
+    margin: 0 auto;
+    width: 90%;
+}
+
+.progressbar {
+  width: 100%;
+  height: 3px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.progressbarfill {
+  height: 3px;
+  transition: width 0.1s ease-in-out;
 }

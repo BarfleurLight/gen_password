@@ -7,7 +7,7 @@ const Head = (props) => {
   return (
       <div className={styles.head}>
         <Example pass={props.pass}/>
-        <Complexity />
+        <Complexity pass={props.pass}/>
         <hr></hr>
       </div>
   )

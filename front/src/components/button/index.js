@@ -11,12 +11,6 @@ const Button = (props) => {
 
   const id = tg.initDataUnsafe.user?.id;
 
-  
-
-  // const id = useState(tg.initDataUnsafe.user?.id);
-  // const name_pass= useState(props.name);
-  // const [password] = useState(props.pass);
-
   const [data, setData] = useState({
     'id': id,
     'name_pass': props.name,
@@ -33,25 +27,6 @@ const Button = (props) => {
     )
     }, [id, props]);
 
-  // const id = tg.initDataUnsafe.user?.id;
-
-  // const name_pass = props.name
-  // const password = props.pass
-
-  // const data = {
-  //   'id': tg.initDataUnsafe.user?.id,
-  //   'name_pass': props.name,
-  //   'password': props.pass
-  // }
-  // const updateData = useCallback(() => {
-  //   const data = {
-  //       'id': tg.initDataUnsafe.user?.id,
-  //       'name_pass': props.name,
-  //       'password': props.pass
-  //     }
-  //     return data
-  // }, [tg, props]);
-
 
   const changeColor = () => {
     const name = document.getElementById("name");
@@ -61,21 +36,6 @@ const Button = (props) => {
     name.style.borderColor = oldColor, 1000);    
   };
 
-
-  // const mainBut = () => {
-  //     if (activeIndex === 1) {
-  //         if (data.name_pass === '') {
-  //           changeColor();
-  //         } else {
-  //           sendData(data);
-  //           tg.close();
-  //         }
-  //     } else {
-  //       swiper.slideNext("speed:", 900);
-  //     }
-  // };
-
-  // tg.MainButton.onClick(mainBut)
 
   useEffect(() => {
     const sendData = () => {
@@ -133,17 +93,6 @@ useEffect(() => {
   }
 }, [tg, swiper, activeIndex]);
 
-
-  // const updateButton = () => {
-  //     if (swiper.activeIndex === 1) {
-  //       console.log(name_pass)
-  //       tg.BackButton.show()
-  //       tg.MainButton.onClick(mainBut);
-  //     } else {
-  //       tg.MainButton.onClick(mainBut);
-  //       tg.BackButton.hide()
-  //     }
-  // }
   
   useEffect(() => {
     const backBut = () => {
@@ -161,10 +110,6 @@ useEffect(() => {
     };
     }, [tg, swiper]);
 
-
-  // useEffect(() => {
-  //   tg.MainButton.onClick(mainBut)
-  // }, []);
 }
 
 
