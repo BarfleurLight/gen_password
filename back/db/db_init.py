@@ -42,6 +42,7 @@ class User_Password(Base):
     def __repr__(self) -> str:
         return f"User_Password(name_pass{self.name_pass!r} users_fk={self.users_fk!r},password_fk={self.password_fk!r})"
 
+
 class Passwords(Base):
     __tablename__ = "passwords"
 

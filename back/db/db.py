@@ -49,6 +49,64 @@ def get_default_pass():
     sessions.commit()
 
 
+def get_password_by_id(password_id):
+    password = sessions.get(Passwords, password_id)
+    return password
+
+
+def get_password_by_params(password):
+    password = sessions.query(Passwords).filter_by(**password).first()
+    return password
+
+
+def get_name_pass(name, user, password):
+    user_password = sessions.query(User_Password).filter_by(
+        users_fk=user.telegram_id,
+        name_pass=name).first()
+    if user_password:
+        return f'Пароль с названием {name} уже существует'
+
+    user_password = sessions.query(User_Password).filter_by(
+        users_fk=user.telegram_id,
+        password_fk=password.id).first()
+    if user_password:
+        return f'Пароль с такими параметрами уже существует:\
+                {user_password.name_pass}'
+
+
+def add_custom_pass(data, user):
+    new_pass = get_password_by_params(data['password'])
+    if not new_pass:
+        new_pass = Passwords(**data['password'])
+        sessions.add(new_pass)
+
+    check = get_name_pass(data['name_pass'], user, new_pass)
+    if check:
+        sessions.rollback()
+        return check
+
+    name_pass = User_Password(name_pass=data['name_pass'])
+    name_pass.user = user
+
+    name_pass.password = new_pass
+    sessions.add(name_pass)
+    sessions.commit()
+
+
+def delete_select_password(name, user):
+    user_password = sessions.query(User_Password).filter_by(
+        users_fk=user.telegram_id,
+        name_pass=name).first()
+    if user_password:
+        if user_password.password_fk == user.fast:
+            return f'Невозможно удалить шаблон\
+                  {user_password.name_pass} установленый по умолчанию'
+        user_password = sessions.delete(user_password)
+        sessions.commit()
+        return f'Шаблон {name} удалён'
+    return f'Пароль с названием {name} не найден'
+
+
 def main_test():
     def_pass = Passwords(**default_pass)
     custom_pass = Passwords(**castom_pass)

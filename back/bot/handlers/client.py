@@ -1,17 +1,20 @@
 from aiogram import types, filters, Bot, Dispatcher
 
 from logics.generate import Gen_Pass
-from db.db import get_user
-from bot.kb.kb import create_markup
+from db.db import get_user, get_password_by_id
+from bot.kb.kb import create_markup_list
+from api.response import response_lst
 
 
 async def default(message: types.Message, bot: Bot):
     id = message.from_user.id
     user = get_user(id)
-    param = user.passwords[0].password.__dict__
-    await message.answer(text=f'`{Gen_Pass(**param).main()}`', parse_mode="MARKDOWN")
-    await message.answer(Gen_Pass(**param).main())
-    await message.answer(Gen_Pass(**param).main())
+    id_defaul_password = user.fast
+    default_password = get_password_by_id(id_defaul_password)
+    for _ in range(3):
+        await message.answer(
+            text=f'`{Gen_Pass(**default_password.__dict__).main()}`',
+            parse_mode="MARKDOWN")
 
 
 async def lst(message: types.Message, bot: Bot):
@@ -22,14 +25,29 @@ async def lst(message: types.Message, bot: Bot):
     await bot.send_message(
         message.from_user.id,
         "Выберите шаблон пароля",
-        reply_markup=create_markup(passwords).as_markup())
+        reply_markup=create_markup_list(passwords).as_markup())
 
 
-async def custom(message: types.Message, bot: Bot):
-    await message.answer(text='Соберите пароль', reply_markup=create_markup().as_markup())
+
+# Test add
+# async def response_api(message: types.Message, bot: Bot):
+#     test_data = {'id': 441314955,
+#                  'name_pass': 'Custom',
+#                  'password': {
+#                     'length': 25,
+#                     'numbers': True,
+#                     'uppercase': True,
+#                     'lowercase': True,
+#                     'symbols': False,
+#                     'delimiter': False,
+#                     'delimiter_value': 4
+#                     }
+#                 }
+#     await response_lst(test_data, bot)
 
 
 def register_handlers_client(dp: Dispatcher):
     dp.message.register(default, filters.Command(commands=['default']))
     dp.message.register(lst, filters.Command(commands=['list']))
-    dp.message.register(custom, filters.Command(commands=['custom']))
+    # dp.message.register(custom, filters.Command(commands=['custom']))
+    # dp.message.register(response_api, filters.Command(commands=['settings']))

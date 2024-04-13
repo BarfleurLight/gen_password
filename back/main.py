@@ -1,7 +1,7 @@
 import os, asyncio, uvicorn
 from aiogram.types import Update
 from fastapi import FastAPI
-from api.response import Data
+from api.response import Data, response_lst
 
 from bot_init import bot, dp
 
@@ -53,7 +53,10 @@ if __name__ == "__main__":
 
         @app.post('/webhook/template')
         async def template_response(data: Data):
-            print(data, type(data))
+            try:
+                response_lst(data, bot)
+            except Exception:
+                await bot.send_message(data['id'], 'Error')
             return {'status': 200}
 
         @app.post('/webhook')
