@@ -53,8 +53,9 @@ if __name__ == "__main__":
 
         @app.post('/webhook/template')
         async def template_response(data: Data):
+            print('--------------------------', data)
             try:
-                response_lst(data, bot)
+                response_lst(dict(data), bot)
             except Exception:
                 await bot.send_message(data['id'], 'Error')
             return {'status': 200}
