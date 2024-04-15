@@ -64,9 +64,3 @@ class Passwords(Base):
 
 
 Base.metadata.create_all(engine)
-#https://www.youtube.com/watch?v=cH0immwfykI&ab_channel=PrettyPrinted
-
-# in code
-# mark = Users(id=1, telegram_id=1)
-# sessions.add(mark)
-# sessions.commit()
