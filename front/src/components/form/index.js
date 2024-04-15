@@ -64,7 +64,7 @@ const Form = (props) => {
   return (
     <form className={styles.selecters}>
       <label>
-        Длина1: {formData.length}
+        Длина: {formData.length}
         <input
           className={styles.select_bar}
           type="range"

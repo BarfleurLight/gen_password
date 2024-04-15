@@ -1,9 +1,12 @@
 import string
-import secrets, random
+import secrets
+import random
 
 
 class Gen_Pass:
-    def __init__(self, length, numbers, uppercase, lowercase, symbols, delimiter, delimiter_value, **kwargs):
+    def __init__(self, length, numbers,
+                 uppercase, lowercase, symbols,
+                 delimiter, delimiter_value, **kwargs):
         self.base_kit = {
             'numbers': string.digits,
             'uppercase': string.ascii_uppercase,
@@ -23,7 +26,7 @@ class Gen_Pass:
     def check_delimiter(self):
         if not self.delimiter:
             return True
-        if self.delimiter and self.delimiter_value in [4 ,5, 6]:
+        if self.delimiter and self.delimiter_value in [4, 5, 6]:
             if self.delimiter_value == 4:
                 if self.length in [4, 9, 14, 19]:
                     return True
@@ -64,7 +67,7 @@ class Gen_Pass:
             self.length -= 1
             raz -= 1
         return res
-    
+
     def main(self):
         if not self.check_delimiter():
             return 'Неправильные параметры'

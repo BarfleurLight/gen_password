@@ -9,8 +9,10 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy import ForeignKey
 
 
-engine = db.create_engine(os.getenv('DB_URL', 'sqlite:///gen_pass.db'), echo=True)
+engine = db.create_engine(os.getenv('DB_URL', 'sqlite:///gen_pass.db'),
+                          echo=True)
 sessions = Session(engine, expire_on_commit=True)
+
 
 class Base(DeclarativeBase):
     pass
@@ -22,9 +24,9 @@ class Users(Base):
     telegram_id: Mapped[int] = mapped_column(primary_key=True)
     admin: Mapped[bool]
     fast: Mapped[int] = mapped_column(ForeignKey("passwords.id"))
-    
+
     passwords: Mapped[List["User_Password"]] = relationship(back_populates="user")
-    
+
     def __repr__(self) -> str:
         return f"User(telegram_id={self.telegram_id!r}, admin={self.admin!r}, fast={self.fast!r})"
 

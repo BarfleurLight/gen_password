@@ -70,8 +70,8 @@ def get_name_pass(name, user, password):
         users_fk=user.telegram_id,
         password_fk=password.id).first()
     if user_password:
-        return f'Пароль с такими параметрами уже существует:\
-                {user_password.name_pass}'
+        name_pass = user_password.name_pass
+        return f'Пароль с такими параметрами уже существует:{name_pass}'
 
 
 def add_custom_pass(data, user):

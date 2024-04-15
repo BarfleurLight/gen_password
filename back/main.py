@@ -1,10 +1,16 @@
-import os, asyncio, uvicorn
+import os
+import asyncio
+import uvicorn
 from aiogram.types import Update
 from fastapi import FastAPI
-from api.response import Data, response_lst
 
 from bot_init import bot, dp
 
+# import handlers
+from db.db import get_default_pass
+from bot.commands import client_commands
+from bot.handlers import client, other, callback
+from api.response import Data, response_lst
 
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
@@ -13,9 +19,6 @@ WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET")
 BASE_WEBHOOK_URL = os.getenv("BASE_WEBHOOK_URL")
 DEBUG = os.getenv("DEBUG", None)
 
-from db.db import get_default_pass
-from bot.commands import client_commands
-from bot.handlers import client, other, callback
 
 callback.register_callback_handlers(dp)
 client.register_handlers_client(dp)

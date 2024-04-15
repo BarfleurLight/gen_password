@@ -3,7 +3,6 @@ from aiogram import types, filters, Bot, Dispatcher
 from logics.generate import Gen_Pass
 from db.db import get_user, get_password_by_id
 from bot.kb.kb import create_markup_list
-from api.response import response_lst
 
 
 async def default(message: types.Message, bot: Bot):
@@ -28,26 +27,11 @@ async def lst(message: types.Message, bot: Bot):
         reply_markup=create_markup_list(passwords).as_markup())
 
 
-
-# Test add
-# async def response_api(message: types.Message, bot: Bot):
-#     test_data = {'id': 441314955,
-#                  'name_pass': 'Custom',
-#                  'password': {
-#                     'length': 25,
-#                     'numbers': True,
-#                     'uppercase': True,
-#                     'lowercase': True,
-#                     'symbols': False,
-#                     'delimiter': False,
-#                     'delimiter_value': 4
-#                     }
-#                 }
-#     await response_lst(test_data, bot)
+async def settings(message: types.Message, bot: Bot):
+    pass
 
 
 def register_handlers_client(dp: Dispatcher):
     dp.message.register(default, filters.Command(commands=['default']))
     dp.message.register(lst, filters.Command(commands=['list']))
-    # dp.message.register(custom, filters.Command(commands=['custom']))
-    # dp.message.register(response_api, filters.Command(commands=['settings']))
+    dp.message.register(settings, filters.Command(commands=['settings']))
