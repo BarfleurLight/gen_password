@@ -1,8 +1,8 @@
-from bot_init import bot
+from aiogram import Bot
 from aiogram.types import BotCommand
 
 
-async def set_default_commands(bot: bot):
+async def set_default_commands(bot: Bot):
     return await bot.set_my_commands([
         BotCommand(command='default', description='Основной шаблон'),
         BotCommand(command='list', description='Список шаблонов'),
@@ -11,5 +11,5 @@ async def set_default_commands(bot: bot):
         ])
 
 
-async def set_all_commands(bot: bot):
+async def set_all_commands(bot: Bot):
     await set_default_commands(bot)

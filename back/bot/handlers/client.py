@@ -2,7 +2,7 @@ from aiogram import types, filters, Bot, Dispatcher
 
 from logics.generate import Gen_Pass
 from db.db import get_user, get_password_by_id
-from bot.kb.kb import create_markup_list
+from bot.kb.kb import create_markup_list, create_markup_settings
 
 
 async def default(message: types.Message, bot: Bot):
@@ -28,7 +28,9 @@ async def lst(message: types.Message, bot: Bot):
 
 
 async def settings(message: types.Message, bot: Bot):
-    pass
+    await message.answer(
+            text='Настройки',
+            reply_markup=create_markup_settings().as_markup())
 
 
 def register_handlers_client(dp: Dispatcher):

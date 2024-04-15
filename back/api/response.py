@@ -3,19 +3,6 @@ from aiogram import Bot
 from db.db import get_user, add_custom_pass
 from bot.kb.kb import create_markup_list
 
-# test_data = {'id': 441314955,
-#              'name_pass': 'test',
-#              'password': {
-#                 'length': 8,
-#                 'numbers': True,
-#                 'uppercase': True,
-#                 'lowercase': True,
-#                 'symbols': True,
-#                 'delimiter': False,
-#                 'delimiter_value': 4
-#                 }
-#             }
-
 
 class Data(BaseModel):
     id: int

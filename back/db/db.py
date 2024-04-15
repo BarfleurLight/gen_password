@@ -104,54 +104,17 @@ def delete_select_password(name, user):
         user_password = sessions.delete(user_password)
         sessions.commit()
         return f'Шаблон {name} удалён'
-    return f'Пароль с названием {name} не найден'
+    return f'Шаблон с названием {name} не найден'
 
 
-def main_test():
-    def_pass = Passwords(**default_pass)
-    custom_pass = Passwords(**castom_pass)
-    sessions.add(def_pass)
-    sessions.add(custom_pass)
-    sessions.commit()
-
-    mark = Users(telegram_id=1, admin=False, fast=1)
-    vasya = Users(telegram_id=2, admin=False, fast=def_pass.id)
-    sessions.add(mark)
-    sessions.add(vasya)
-    sessions.commit()
-
-    sl = User_Password(name_pass="Default")
-    sl.user = mark
-    sl.password = def_pass
-    sessions.add(sl)
-    sessions.commit()
-
-    sl2 = User_Password(name_pass="Custom")
-    sl2.user = mark
-    sl2.password = custom_pass
-    sessions.add(sl2)
-    sessions.commit()
-    print(mark.passwords)
-    print(mark.passwords[0].password.length)
-
-    # mark.passwords.append(def_pass)
-    # mark.name_pass = 'Default'
-    # mark.passwords.append(custom_pass)
-    # mark.name_pass ='Default'
-    # vasya.passwords.append(def_pass, name_pass='Default')
-
-    # defdult_pass = sessions.get(Passwords, 1)
-    # print(defdult_pass)
-
-    # if defdult_pass:
-    #     return None
-    # def_pass = Passwords(**example)
-    # def_user_pass = User_Password(name_pass='Default')
-
-    # mark.user_passwords.append(def_user_pass)
-    # def_pass.passs.append(def_user_pass)
-
-    # sessions.add(def_user_pass)
-
-    # us = sessions.get(Users, 1)
-    # print(us.user_passwords)
+def change_main_template(name, user):
+    user_password = sessions.query(User_Password).filter_by(
+        users_fk=user.telegram_id,
+        name_pass=name).first()
+    if user_password:
+        if user_password.password_fk != user.fast:
+            user.fast = user_password.password_fk
+            sessions.commit()
+            return f'Шаблон "{name}" установлен как основной'
+        return f'Шаблон "{name}" уже установлен'
+    return f'Шаблон "{name}" не найден'
