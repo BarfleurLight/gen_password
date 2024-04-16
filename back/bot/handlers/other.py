@@ -37,12 +37,12 @@ async def help(message: types.Message, bot: Bot):
                    message.from_user.first_name)))
 
 
-async def echo_send(message: types.Message, bot: Bot):
-    add_send_message(
-        await bot.send_message(message.chat.id, message.text))
+# async def echo_send(message: types.Message, bot: Bot):
+#     add_send_message(
+#         await bot.send_message(message.chat.id, message.text))
 
 
 def register_handlers_other(dp: Dispatcher):
     dp.message.register(get_start, filters.Command(commands=['start']))
     dp.message.register(help, filters.Command(commands=['help']))
-    dp.message.register(echo_send)
+    # dp.message.register(echo_send)
