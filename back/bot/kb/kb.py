@@ -21,12 +21,16 @@ class DeleteSelectTemplate(CallbackData, prefix='del_temp'):
     name: str
 
 
-class AllSettings(CallbackData, prefix='settings'):
+class ChangeMainTemplate(CallbackData, prefix='settings'):
     param: str
 
 
 class SelectMainTemplate(CallbackData, prefix='change'):
     name: str
+
+
+class CleanHistory(CallbackData, prefix='clean'):
+    param: str
 
 
 def create_markup_list(passwords=[]):
@@ -75,7 +79,12 @@ def create_markup_settings():
     builder = InlineKeyboardBuilder()
     change_default_pass = types.InlineKeyboardButton(
         text="Изменить шаблон по умолчанию",
-        callback_data=AllSettings(param='main_template').pack()
+        callback_data=ChangeMainTemplate(param='main_template').pack()
+        )
+    clean_chat = types.InlineKeyboardButton(
+        text="Очистить историю",
+        callback_data=CleanHistory(param='clean').pack()
         )
     builder.row(change_default_pass)
+    builder.row(clean_chat)
     return builder

@@ -7,6 +7,7 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column, relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy import ForeignKey
+from datetime import datetime
 
 
 engine = db.create_engine(os.getenv('DB_URL', 'sqlite:///gen_pass.db'),
@@ -61,6 +62,14 @@ class Passwords(Base):
 
     def __repr__(self) -> str:
         return f"Passwords(id={self.id!r})"
+
+
+class Messages(Base):
+    __tablename__ = "messages"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    message_id: Mapped[int]
+    chat_id: Mapped[int]
+    date: Mapped[datetime]
 
 
 Base.metadata.create_all(engine)

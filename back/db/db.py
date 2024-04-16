@@ -1,6 +1,8 @@
-from db.db_init import Users, sessions, Passwords, User_Password
-# from sqlalchemy import select
-# from sqlalchemy.orm import selectinload
+from db.db_init import (sessions,
+                        Users, Passwords, Messages,
+                        User_Password)
+from datetime import datetime, timezone
+
 
 default_pass = {
     'length': 14,
@@ -118,3 +120,32 @@ def change_main_template(name, user):
             return f'Шаблон "{name}" установлен как основной'
         return f'Шаблон "{name}" уже установлен'
     return f'Шаблон "{name}" не найден'
+
+
+def add_message(message_id, chat_id, date):
+    message = Messages(message_id=message_id,
+                       chat_id=chat_id,
+                       date=date)
+    sessions.add(message)
+    sessions.commit()
+
+
+def delete_message(messages):
+    for message in messages:
+        sessions.delete(message)
+    sessions.commit()
+
+
+def get_messages_user(chat_id):
+    time_now = datetime.now(timezone.utc).replace(tzinfo=None)
+    messages = sessions.query(Messages).where(
+            Messages.date < time_now
+        ).filter_by(chat_id=chat_id)
+    return messages.all()
+
+
+def add_send_message(message):
+    chat_id = message.chat.id
+    message_id = message.message_id
+    date = message.date
+    add_message(message_id, chat_id, date)

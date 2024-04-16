@@ -12,6 +12,9 @@ from bot.commands import client_commands
 from bot.handlers import client, other, callback
 from api.response import Data, response_lst
 
+# import middleware
+from bot.middleware.middleware import SomeMiddleware
+
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
 WEBHOOK_PATH = os.getenv("WEBHOOK_PATH")
@@ -23,6 +26,8 @@ DEBUG = os.getenv("DEBUG", None)
 callback.register_callback_handlers(dp)
 client.register_handlers_client(dp)
 other.register_handlers_other(dp)
+
+dp.update.outer_middleware(SomeMiddleware())
 
 
 async def on_startup() -> None:
