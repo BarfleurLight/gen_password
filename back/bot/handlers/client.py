@@ -12,7 +12,8 @@ async def default(message: types.Message, bot: Bot):
     default_password = get_password_by_id(id_defaul_password).__dict__
     for _ in range(3):
         add_send_message(
-            await message.answer(
+            await bot.send_message(
+                message.chat.id,
                 text=f'`{Gen_Pass(**default_password).main()}`',
                 parse_mode="MARKDOWN"))
 
@@ -30,9 +31,11 @@ async def lst(message: types.Message, bot: Bot):
 
 async def settings(message: types.Message, bot: Bot):
     add_send_message(
-        await message.answer(
-                text='Настройки',
-                reply_markup=create_markup_settings().as_markup()))
+        await bot.send_message(
+            message.chat.id,
+            text='Настройки',
+            reply_markup=create_markup_settings().as_markup()
+        ))
 
 
 def register_handlers_client(dp: Dispatcher):

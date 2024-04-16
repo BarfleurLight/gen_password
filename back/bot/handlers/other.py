@@ -1,4 +1,4 @@
-from aiogram import types, filters, Dispatcher
+from aiogram import types, filters, Dispatcher, Bot
 from db.db import add_send_message
 
 introduction = ('Описание: \nПривет, {}!\nЭто бот для генерации паролей\n'
@@ -22,23 +22,24 @@ footer = ('Контакты и ссылки: \n'
           'GitHub: https://github.com/BarfleurLight/gen_password')
 
 
-async def get_start(message: types.Message):
-    mess = await message.answer(
-        introduction.format(message.from_user.first_name))
-    add_send_message(mess)
+async def get_start(message: types.Message, bot: Bot):
+    add_send_message(
+        await bot.send_message(
+            message.chat.id,
+            introduction.format(message.from_user.first_name)))
 
 
-async def help(message: types.Message):
-    mess = await message.answer(
-               (introduction + description + footer).format(
-                   message.from_user.first_name)
-                   )
-    add_send_message(mess)
+async def help(message: types.Message, bot: Bot):
+    add_send_message(
+        await bot.send_message(
+            message.chat.id,
+            (introduction + description + footer).format(
+                   message.from_user.first_name)))
 
 
-async def echo_send(message: types.Message):
-    mess = await message.answer(message.text)
-    add_send_message(mess)
+async def echo_send(message: types.Message, bot: Bot):
+    add_send_message(
+        await bot.send_message(message.chat.id, message.text))
 
 
 def register_handlers_other(dp: Dispatcher):
