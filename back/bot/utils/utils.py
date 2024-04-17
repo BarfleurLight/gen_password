@@ -1,7 +1,6 @@
-import aioschedule
-import asyncio
 from aiogram import Bot
 from db.db import get_old_message, delete_message
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
 async def clean_history_by_time(bot: Bot):
@@ -14,8 +13,4 @@ async def clean_history_by_time(bot: Bot):
     delete_message(messages)
 
 
-async def scheduler(bot: Bot):
-    aioschedule.every(1).minutes.do(clean_history_by_time, bot=bot)
-    while True:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
+scheduler = AsyncIOScheduler()

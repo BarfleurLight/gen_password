@@ -5,6 +5,7 @@ from aiogram.types import Update
 from fastapi import FastAPI
 
 from bot_init import bot, dp
+from bot.utils.utils import scheduler, clean_history_by_time
 
 # import middleware
 # from bot.middleware.middleware import SomeMiddleware
@@ -16,8 +17,6 @@ from bot.commands import client_commands
 from bot.handlers import client, other, callback
 from api.response import Data, response_lst
 
-
-from bot.utils.utils import scheduler
 
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
@@ -34,7 +33,10 @@ other.register_handlers_other(dp)
 
 async def on_startup() -> None:
     get_default_pass()
-    asyncio.create_task(scheduler(bot))
+    scheduler.add_job(clean_history_by_time,
+                      'interval', minutes=1,
+                      args=(bot,))
+    scheduler.start()
     print('Старт')
     if DEBUG:
         await bot.delete_webhook()
