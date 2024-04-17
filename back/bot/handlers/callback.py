@@ -22,10 +22,11 @@ from db.db import (get_user,
 
 async def list_handler(query: CallbackQuery, callback_data: ListCallback):
     for _ in range(3):
+        password = Gen_Pass(**callback_data.dict()).main()
         add_send_message(
             await bot.send_message(
                 query.from_user.id,
-                text=f'`{Gen_Pass(**callback_data.dict()).main()}`',
+                text=f'`{password}`',
                 parse_mode="MARKDOWN"))
 
 

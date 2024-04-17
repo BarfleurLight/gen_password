@@ -34,7 +34,7 @@ other.register_handlers_other(dp)
 async def on_startup() -> None:
     get_default_pass()
     scheduler.add_job(clean_history_by_time,
-                      'interval', minutes=1,
+                      'interval', minutes=15,
                       args=(bot,))
     scheduler.start()
     print('Старт')

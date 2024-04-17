@@ -11,10 +11,11 @@ async def default(message: types.Message, bot: Bot):
     id_defaul_password = user.fast
     default_password = get_password_by_id(id_defaul_password).__dict__
     for _ in range(3):
+        password = Gen_Pass(**default_password).main()
         add_send_message(
             await bot.send_message(
                 message.chat.id,
-                text=f'`{Gen_Pass(**default_password).main()}`',
+                text=f'`{password}`',
                 parse_mode="MARKDOWN"))
 
 

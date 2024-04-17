@@ -14,6 +14,7 @@ class Gen_Pass:
             'symbols': '!#$&?'
         }
         self.start_kit = ''
+        self.start_kit_list = []
 
         self.length = length
         self.numbers = numbers
@@ -42,45 +43,56 @@ class Gen_Pass:
         ves = [1, 1, 3, 1]
         if self.numbers:
             self.start_kit += self.base_kit.get('numbers') * ves[0]
+            self.start_kit_list.append(self.base_kit.get('numbers'))
         if self.uppercase:
             self.start_kit += self.base_kit.get('uppercase') * ves[1]
+            self.start_kit_list.append(self.base_kit.get('uppercase'))
         if self.lowercase:
             self.start_kit += self.base_kit.get('lowercase') * ves[2]
+            self.start_kit_list.append(self.base_kit.get('lowercase'))
         if self.symbols:
             self.start_kit += self.base_kit.get('symbols') * ves[3]
+            self.start_kit_list.append(self.base_kit.get('symbols'))
+
         self.start_kit = list(self.start_kit)
         random.shuffle(self.start_kit)
         return self.start_kit
 
     def create_pass(self):
         raz = -1
+        lenght = self.length
         if self.delimiter:
-            self.length -= self.length % self.delimiter_value
+            lenght -= lenght % self.delimiter_value
             raz = self.delimiter_value
         res = ''
 
-        while self.length:
+        while lenght:
             if raz == 0:
                 res += '-'
                 raz = self.delimiter_value
-            res += secrets.choice(self.start_kit)
-            self.length -= 1
+            symbol = secrets.choice(self.start_kit)
+            if (len(res) > 0) and (res[0] == symbol):
+                continue
+            res += symbol
+            lenght -= 1
             raz -= 1
         return res
+
+    def check_pass(self, password: str):
+        test = []
+
+        for value in self.start_kit_list:
+            test.append(any(char in password for char in value))
+
+        return all(test)
 
     def main(self):
         if not self.check_delimiter():
             return 'Неправильные параметры'
         self.create_set()
-        return self.create_pass()
 
-
-# example = {
-#     'length': 23,
-#     'numbers': True,
-#     'uppercase': True,
-#     'lowercase': True,
-#     'symbols': True,
-#     'delimiter': True,
-#     'delimiter_value': 5
-#     }
+        check_pass = False
+        while not check_pass:
+            password = self.create_pass()
+            check_pass = self.check_pass(password)
+        return password
