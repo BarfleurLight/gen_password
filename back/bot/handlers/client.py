@@ -22,20 +22,18 @@ async def lst(message: types.Message, bot: Bot):
     id = message.from_user.id
     user = get_user(id)
     passwords = [[i.name_pass, i.password.__dict__] for i in user.passwords]
-    add_send_message(
-        await bot.send_message(
-            message.from_user.id,
-            "Выберите шаблон пароля",
-            reply_markup=create_markup_list(passwords).as_markup()))
+    await bot.send_message(
+        message.from_user.id,
+        "Выберите шаблон пароля",
+        reply_markup=create_markup_list(passwords).as_markup())
 
 
 async def settings(message: types.Message, bot: Bot):
-    add_send_message(
-        await bot.send_message(
-            message.chat.id,
-            text='Настройки',
-            reply_markup=create_markup_settings().as_markup()
-        ))
+    await bot.send_message(
+        message.chat.id,
+        text='Настройки',
+        reply_markup=create_markup_settings().as_markup()
+    )
 
 
 def register_handlers_client(dp: Dispatcher):

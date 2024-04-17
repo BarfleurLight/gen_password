@@ -1,7 +1,7 @@
 from db.db_init import (sessions,
                         Users, Passwords, Messages,
                         User_Password)
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 
 default_pass = {
@@ -149,3 +149,13 @@ def add_send_message(message):
     message_id = message.message_id
     date = message.date
     add_message(message_id, chat_id, date)
+
+
+def get_old_message():
+    time_until_clean = (
+        datetime.now(timezone.utc) - timedelta(minutes=1)
+        ).replace(tzinfo=None)
+    messages = sessions.query(Messages).where(
+            Messages.date < time_until_clean
+        ).all()
+    return messages

@@ -69,14 +69,14 @@ async def change_main_tempalte(query: CallbackQuery,
     user_id = query.from_user.id
     user = get_user(user_id)
     old_main_template = change_main_template(name_pass, user)
-    await query.answer(text=old_main_template, cache_time=2)
+    await query.answer(text=old_main_template, cache_time=1)
 
 
 async def clean_history(query: CallbackQuery, bot: Bot):
     messages = get_messages_user(query.message.chat.id)
+    messages_id = [i.message_id for i in messages]
+    await bot.delete_messages(query.message.chat.id, messages_id)
     delete_message(messages)
-    messages = [i.message_id for i in messages]
-    await bot.delete_messages(query.message.chat.id, messages)
 
 
 def register_callback_handlers(dp: Dispatcher):

@@ -6,14 +6,18 @@ from fastapi import FastAPI
 
 from bot_init import bot, dp
 
+# import middleware
+# from bot.middleware.middleware import SomeMiddleware
+# dp.update.outer_middleware(SomeMiddleware())
+
 # import handlers
 from db.db import get_default_pass
 from bot.commands import client_commands
 from bot.handlers import client, other, callback
 from api.response import Data, response_lst
 
-# import middleware
-from bot.middleware.middleware import SomeMiddleware
+
+from bot.utils.utils import scheduler
 
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT"))
@@ -27,11 +31,10 @@ callback.register_callback_handlers(dp)
 client.register_handlers_client(dp)
 other.register_handlers_other(dp)
 
-dp.update.outer_middleware(SomeMiddleware())
-
 
 async def on_startup() -> None:
     get_default_pass()
+    asyncio.create_task(scheduler(bot))
     print('Старт')
     if DEBUG:
         await bot.delete_webhook()

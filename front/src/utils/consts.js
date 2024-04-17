@@ -13,7 +13,7 @@
       }
     
     const rangeValueTable = {
-      "0": {min: 0,
+      "0": {min: 4,
         max: 32,
         step: 1},
       "4": {min: 4,
