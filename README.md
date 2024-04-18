@@ -16,6 +16,7 @@
 - FastAPI https://fastapi.tiangolo.com/
 - SQLAlchemy https://www.sqlalchemy.org/
 - uvicorn https://www.uvicorn.org/
+- apscheduler https://pypi.org/project/APScheduler/
 
 ## Об авторе
 Автор проекта: Обришти Марк  
