@@ -1,6 +1,9 @@
+import os
 from aiogram.filters.callback_data import CallbackData
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import types
+
+BASE_WEBHOOK_URL = os.getenv("BASE_WEBHOOK_URL")
 
 
 class ListCallback(CallbackData, prefix="list"):
@@ -42,7 +45,7 @@ def create_markup_list(passwords=[]):
         )
     new = types.InlineKeyboardButton(
         text="+",
-        web_app=types.WebAppInfo(url='https://obrishti.ddns.net/')
+        web_app=types.WebAppInfo(url=BASE_WEBHOOK_URL)
         )
     dell = types.InlineKeyboardButton(
         text="-",
