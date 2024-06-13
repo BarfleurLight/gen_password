@@ -20,7 +20,6 @@ services:
   front:
     image: mvobr/gen_pass_front
     env_file: .env
-    restart: unless-stopped
     volumes:
       - static:/app/result_build/build
 
