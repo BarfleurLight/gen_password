@@ -44,7 +44,9 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        proxy_host: ${{ secrets.PROXY_HOST }}
+        proxy_username: ${{ secrets.USER }}
+        proxy_key: ${{ secrets.SSH_KEY }}
         source: "docker-compose.yml, nginx/nginx.conf"
         target: "gen_pass"
     - name: Executing remote ssh commands to deploy
@@ -53,7 +55,9 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        proxy_host: ${{ secrets.PROXY_HOST }}
+        proxy_username: ${{ secrets.USER }}
+        proxy_key: ${{ secrets.SSH_KEY }}
         script: |
           cd gen_pass
           sudo docker compose pull
