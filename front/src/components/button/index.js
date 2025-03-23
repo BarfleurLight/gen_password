@@ -45,7 +45,7 @@ const Button = (props) => {
 
       console.log('data_ into sendData', data);
   
-      var response = fetch('https://genpass.mvobr.ru/webhook/template', {
+      var response = fetch('https://genpass.obrishti.ru/webhook/template', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
