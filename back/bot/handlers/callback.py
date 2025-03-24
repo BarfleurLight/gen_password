@@ -75,6 +75,8 @@ async def change_main_tempalte(query: CallbackQuery,
 
 async def clean_history(query: CallbackQuery, bot: Bot):
     messages = get_messages_user(query.message.chat.id)
+    if not messages:
+        return
     messages_id = [i.message_id for i in messages]
     await bot.delete_messages(query.message.chat.id, messages_id)
     delete_message(messages)

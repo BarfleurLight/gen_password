@@ -37,7 +37,9 @@ async def on_startup() -> None:
                       'interval', minutes=15,
                       args=(bot,))
     scheduler.start()
-    print('Старт')
+
+    await bot.send_message(441314955, text='Бот вышел в онлайн')
+    
     if DEBUG:
         await bot.delete_webhook()
     else:
